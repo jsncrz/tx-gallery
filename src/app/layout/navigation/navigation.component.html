@@ -1,0 +1,24 @@
+<div id="topbar">
+    <button class="menu-icon" icon="tuiIconMenuLarge" title="Menu" tuiIconButton tuiSlot="left" appearance="mono" type="button"
+        (click)="toggle(true)" (tuiActiveZoneChange)="toggle($event)">
+        <div *tuiSidebar="open; direction: 'left'" id="side-menu">
+            <div class="nav-group">
+                <p class="nav-group-header tui-text_body-xs">OVERVIEW</p>
+                <p class="nav-item">
+                    <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters" (click)="toggle(false)"
+                        routerLinkActive="active-link">
+                        <tui-svg src="tuiIconSmileLarge" class="icon"></tui-svg>
+                        <span class="nav-item-label">Character</span>
+                    </a>
+                </p>
+                <p class="nav-item">
+                    <a class="nav-item-link" tuiLink routerLink="/gallery" (click)="toggle(false)"
+                        routerLinkActive="active-link">
+                        <tui-svg src="tuiIconImageLarge" class="icon"></tui-svg>
+                        <span class="nav-item-label">Gallery</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </button>
+</div>

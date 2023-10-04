@@ -1,0 +1,11 @@
+#main-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-top: 3.9375rem;
+}
+
+#main-layout {
+    flex: 1 1 auto;
+}

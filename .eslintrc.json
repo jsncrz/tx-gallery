@@ -1,7 +1,5 @@
 {
-  "root": true,
   "ignorePatterns": ["!**/*"],
-  "plugins": ["@nx"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -14,7 +12,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "vg",
             "style": "camelCase"
           }
         ],
@@ -22,7 +20,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "vg",
             "style": "kebab-case"
           }
         ]
@@ -33,5 +31,6 @@
       "extends": ["plugin:@nx/angular-template"],
       "rules": {}
     }
-  ]
+  ],
+  "extends": ["./.eslintrc.base.json"]
 }
