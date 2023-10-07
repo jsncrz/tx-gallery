@@ -46,6 +46,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.initSearchForm();
+    this.characters$ = this.characterService.getResults();
     this.getCharacter();
     this.paginateDetails = this.characterService.getResultPagination();
     this.loading$ = this.characterService.isLoading();
@@ -118,7 +119,7 @@ export class ListComponent implements OnInit {
     if (this.searchForm.get('group') != null && this.searchForm.get('group')?.value != '' && this.searchForm.get('group')?.value?.value != '') {
       filter.push(`group=${this.searchForm.get('group')?.value?.value}`);
     }
-    this.characters$ = this.characterService.getCharacters(filter, this.sort, this.limit, this.page + 1);
+    this.characterService.getCharacters(filter, this.sort, this.limit, this.page + 1);
   }
 
   searchTag(tag: string) {

@@ -75,6 +75,7 @@ export class ImageGridComponent implements OnInit {
 
     ngOnInit() {
         this.initSearchForm();
+        this.tweets$ = this.twitterService.getResults();
         this.initSortOptions();
         this.route.queryParamMap.subscribe(
             (params: ParamMap) => {
@@ -158,7 +159,7 @@ export class ImageGridComponent implements OnInit {
             filter.push(`tags=${this.character.tag}`);
             tag = this.character.tag;
         }
-        this.tweets$ = this.twitterService.getTweets(filter, this.sort, this.limit, this.page + 1);
+        this.twitterService.getTweets(filter, this.sort, this.limit, this.page + 1);
         if (this.scrollBar) {
             const { nativeElement } = this.scrollBar;
             nativeElement.scrollTop = 0;

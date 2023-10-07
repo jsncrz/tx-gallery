@@ -63,4 +63,8 @@ export abstract class BaseService<T> {
         this.totalResults$.next(result.totalResults);
     }
 
+    getResults(): Subject<T[]> {
+        return this.results$;
+    }
+
 }
