@@ -173,4 +173,12 @@
 :root {
     --tui-link: var(--primary-500) !important;
     --tui-link-hover: var(--primary-300) !important;
+    --tui-primary: var(--primary-500);
+    --tui-primary-hover: var(--primary-600);
+    --tui-primary-active: var(--primary-700);
+    --tui-primary-text: #fff;
+}
+
+.clickable {
+    cursor: pointer;
 }

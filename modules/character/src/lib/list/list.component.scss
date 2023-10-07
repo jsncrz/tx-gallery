@@ -1,39 +1,20 @@
-table {
-    width: 100%;
+.character-list {
+    height: 75vh;
 }
 
-td {
-    white-space: nowrap;
-    border-color: transparent;
-
-    div {
-
-        white-space: nowrap;
-        border-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-tbody {
-    border-color: transparent;
-}
-
-tr {
-    padding: 2em 0em;
-}
 .search-container {
+    padding-bottom: 1em;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
+    border-bottom: 1px solid var(--gray-300);
 }
+
 .search-row {
     flex: 0.6;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
-    gap: 20px;
 
     .search-group {
         flex: 1;
@@ -45,6 +26,21 @@ tr {
 
     .list-sort {
         flex: 1;
+    }
+
+    .character-sort {
+        transition-property: box-shadow, background;
+        transition-duration: var(--tui-duration, 300ms);
+        transition-timing-function: ease-in-out;
+        background: var(--tui-base-01);
+        color: var(--tui-text-02);
+        box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.1);
+    }
+
+    .character-sort:hover {
+        box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.16);
+        color: var(--tui-text-02);
+        border: inherit;
     }
 }
 
@@ -66,11 +62,19 @@ tr {
         flex: 0 60%;
         align-items: center;
         justify-content: center;
+
         * {
             display: flex;
-            margin: 5px auto;
+            margin: 10px auto;
             align-items: center;
             justify-content: center;
+        }
+
+        .character-tl-name {
+            margin: 0 auto;
+            line-height: 0.1;
+            color: var(--gray-600);
+            font-size: 0.85em;
         }
     }
 
@@ -81,17 +85,47 @@ tr {
         justify-content: flex-end;
         gap: 50px;
 
-        .character-group, .character-twitter, .character-last-sync, .character-sync{
+        .character-group,
+        .character-twitter,
+        .character-last-sync,
+        .character-sync {
             display: flex;
-            margin: 5px auto;
+            margin: 3px auto;
             align-items: center;
             justify-content: center;
         }
-        .character-last-sync {
-            color: var(--gray-500);
-            font-size: 0.6em;
-            margin: auto;
-        }
     }
 
+    .character-debut-date {
+        margin: 0 auto;
+        line-height: 0.5;
+    }
+
+    .character-last-sync,
+    .character-debut-date {
+        color: var(--gray-500);
+        font-size: 0.6em;
+        margin: auto;
+    }
+
+}
+
+@media(max-width: 1024px) {
+    .search-row {
+        flex: 1;
+        flex-flow: column wrap;
+    }
+
+    .character-picture {
+        flex: 0 100% !important;
+        text-align: center;
+    }
+
+    .character-detail {
+        flex: 0 50% !important;
+    }
+
+    .character-twitter {
+        flex: 0 50% !important;
+    }
 }

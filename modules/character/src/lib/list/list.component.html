@@ -2,6 +2,7 @@
     <div class="search-container">
         <div [formGroup]="searchForm" class="search-row">
             <div class="search-group">
+
                 <tui-select formControlName="group" [valueContent]="label">
                     Group
                     <tui-data-list-wrapper *tuiDataList [itemContent]="label" [items]="groups"></tui-data-list-wrapper>
@@ -13,42 +14,34 @@
                     <input tuiTextfield placeholder="Character Name" />
                 </tui-input>
             </div>
-            <div class="list-sort">
-                <div tuiGroup [collapsed]="true">
-                    <tui-select formControlName="sortField" [valueContent]="label">
-                        Sort
-                        <tui-data-list-wrapper *tuiDataList [itemContent]="label"
-                            [items]="sortOptions"></tui-data-list-wrapper>
-                    </tui-select>
-                    <button class="character-sync tui-group__auto-width-item" (click)="sortOrderClicked()"
-                        [icon]="sortOrder === 'desc' ? 'tuiIconChevronDown': 'tuiIconChevronUp'" tuiIconButton
-                        type="button" appearance="outline"></button>
-                </div>
+            <div class="list-sort" tuiGroup [collapsed]="true">
+                <tui-select formControlName="sortField" [valueContent]="label">
+                    Sort
+                    <tui-data-list-wrapper *tuiDataList [itemContent]="label"
+                        [items]="sortOptions"></tui-data-list-wrapper>
+                </tui-select>
+
+                <button class="character-sort tui-group__auto-width-item" (click)="sortOrderClicked()"
+                    [icon]="sortOrder === 'desc' ? 'tuiIconArrowDown': 'tuiIconArrowUp'" tuiIconButton type="button"
+                    [disabled]="(loading$ | async)!" appearance="outline"></button>
             </div>
         </div>
         <ng-template #label let-item>
             <div class="name">{{ item.label }}</div>
         </ng-template>
-        <ng-template #loading>
-            <tui-loader class="tui-space_vertical-3 loader"></tui-loader>
-        </ng-template>
-        <div class="flex-order-2">
-            <!-- <p-dropdown [options]="sortOptions" (onChange)="onSortChange($event)"></p-dropdown> -->
-            <!-- <p-button styleClass="p-button-rounded p-button-secondary p-button-text"
-                [icon]="sortOrder === 'desc' ? 'pi pi-sort-down': 'pi pi-sort-up'" (click)="sortOrderClicked()"></p-button> -->
-        </div>
     </div>
-    <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!" style="display: none;">
-        <div class="">
+    <tui-scrollbar class="character-list">
+        <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
             <div *ngFor="let character of characters$ | async" class="character-row">
                 <div class="character-picture">
                     <img [src]="character.pictureUrl" [alt]="character.tlName" />
                 </div>
                 <div class="character-detail">
                     <div class="tui-text_h6 tui-space_vertical-1">{{character.name}}</div>
-                    <div class="tui-text_body-m tui-space_vertical-1">{{character.tlName}}</div>
+                    <div class="character-tl-name tui-text_body-m tui-space_vertical-1">{{character.tlName}}</div>
+                    <small class="character-debut-date">Debut date: {{character.debutDate | date:'longDate'}}</small>
                     <div class="tui-space_vertical-1">
-                        <tui-tag status="primary" class="tag" [hoverable]="true" [value]="character.tag"
+                        <tui-tag status="primary" class="tag" [hoverable]="true" [value]="'#' +character.tag"
                             (click)="searchTag(character.tag)"></tui-tag>
                     </div>
                 </div>
@@ -61,10 +54,9 @@
                         tuiIconButton type="button" appearance="flat" [size]="'s'"></button>
                 </div>
             </div>
-        </div>
-        <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[15,30,45,60]"
-            [total]="(paginateDetails.totalResults$ | async)!"
-            (paginationChange)="paginationChanged($event)"></tui-table-pagination>
-        <!-- (pageChange)="onPage($event)" (sizeChange)="onSize($event)" -->
-    </tui-loader>
+        </tui-loader>
+    </tui-scrollbar>
+    <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[15,30,45,60]"
+        [total]="(paginateDetails.totalResults$ | async)!"
+        (paginationChange)="paginationChanged($event)"></tui-table-pagination>
 </div>

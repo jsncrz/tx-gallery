@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TuiTableModule, TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
-import { TuiButtonModule, TuiDataListModule, TuiGroupModule, TuiLoaderModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiDataListModule, TuiGroupModule, TuiLoaderModule, TuiScrollbarModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -14,7 +14,8 @@ import { Character, CharacterGroup, CharacterService, PaginateDetails, TwitterSe
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,
     TuiLoaderModule, TuiTableModule, TuiTablePaginationModule, TuiTagModule, TuiButtonModule, TuiSelectModule,
-    TuiDataListModule, TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule
+    TuiDataListModule, TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
+    TuiScrollbarModule
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
@@ -28,8 +29,9 @@ export class ListComponent implements OnInit {
   characters$!: Subject<Character[]>;
   limit = 30;
   page = 0;
-  sortOrder = 'desc';
-  sort = 'name:asc';
+  sortOrder$: Subject<'asc' | 'desc'> = new Subject();
+  sortOrder: 'asc' | 'desc' = 'asc';
+  sort = 'debutDate:desc';
   columns = ['pictureUrl', 'tlName', 'group']
   groups: { label: string, value: string }[] = [];
   sortOptions: { label: string, value: string }[] = [];
@@ -53,13 +55,23 @@ export class ListComponent implements OnInit {
   initSearchForm() {
     this.searchForm = new FormGroup({
       name: new FormControl(''),
-      group: new FormControl(''),
-      sortField: new FormControl('tlName'),
+      group: new FormControl({ label: 'Default', value: '' }),
+      sortField: new FormControl({ label: 'Debut', value: 'debutDate' }),
     });
-    this.searchForm.get('group')?.valueChanges
+    this.searchForm.get('group')?.valueChanges.pipe(distinctUntilChanged())
       .subscribe(() => { this.getCharacter(); });
     this.searchForm.get('name')?.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => { this.getCharacter(); });
+    this.searchForm.get('sortField')?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe(() => {
+        this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
+        this.getCharacter();
+      });
+    this.sortOrder$.pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe(() => {
+        this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
+        this.getCharacter();
+      });
   }
 
   initGroups() {
@@ -71,8 +83,7 @@ export class ListComponent implements OnInit {
 
   initSortOptions() {
     this.sortOptions.push({ label: 'Name', value: 'tlName' });
-    this.sortOptions.push({ label: 'Date', value: '_id' });
-    this.sortOptions.push({ label: 'Last Sync', value: 'lastSynced' });
+    this.sortOptions.push({ label: 'Debut', value: 'debutDate' });
   }
 
   syncClicked(id: string) {
@@ -94,11 +105,9 @@ export class ListComponent implements OnInit {
     this.getCharacter();
   }
 
-
   sortOrderClicked() {
-    this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc'
-    this.sort = this.searchForm.get('sortField')?.value + ':' + this.sortOrder;
-    this.getCharacter();
+    this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
+    this.sortOrder$.next(this.sortOrder === 'desc' ? 'asc' : 'desc');
   }
 
   getCharacter() {
@@ -106,8 +115,8 @@ export class ListComponent implements OnInit {
     if (this.searchForm.get('name') != null && this.searchForm.get('name')?.value != '') {
       filter.push(`tlName=${this.searchForm.get('name')?.value}`);
     }
-    if (this.searchForm.get('group') != null && this.searchForm.get('group')?.value != '') {
-      filter.push(`group=${this.searchForm.get('group')?.value}`);
+    if (this.searchForm.get('group') != null && this.searchForm.get('group')?.value != '' && this.searchForm.get('group')?.value?.value != '') {
+      filter.push(`group=${this.searchForm.get('group')?.value?.value}`);
     }
     this.characters$ = this.characterService.getCharacters(filter, this.sort, this.limit, this.page + 1);
   }

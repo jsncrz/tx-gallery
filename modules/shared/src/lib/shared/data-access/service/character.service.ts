@@ -14,13 +14,11 @@ export class CharacterService extends BaseService<Character> {
     }
 
     private refreshCharacter(filter: string[], sortBy: string, limit: number, page: number) {
+        this.loading$.next(true);
         const queryObj = this.createQueryObject(filter, sortBy, limit, page);
         this.httpClient.get<Paginate<Character>>(`${this.resourceUrl}/?${queryObj.filter}`
             + `${queryObj.sortOption}${queryObj.limitOption}${queryObj.pageOption}`)
-            .pipe(debounceTime(500), distinctUntilChanged(),
-                tap(() => {
-                    this.loading$.next(true);
-                }),)
+            .pipe(debounceTime(500), distinctUntilChanged(),)
             .subscribe({
                 next: (result) => {
                     this.setPaginateResults(result);

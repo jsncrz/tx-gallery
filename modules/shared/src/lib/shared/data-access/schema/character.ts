@@ -9,6 +9,7 @@ export interface Character extends BaseObject {
     group: string;
     limit: number;
     minFaves: number;
+    debutDate?: Date;
     lastSynced?: Date;
     isSyncing?: boolean
 }
