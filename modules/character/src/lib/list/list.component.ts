@@ -30,7 +30,7 @@ export class ListComponent implements OnInit {
   limit = 30;
   page = 0;
   sortOrder$: Subject<'asc' | 'desc'> = new Subject();
-  sortOrder: 'asc' | 'desc' = 'asc';
+  sortOrder: 'asc' | 'desc' = 'desc';
   sort = 'debutDate:desc';
   columns = ['pictureUrl', 'tlName', 'group']
   groups: { label: string, value: string }[] = [];

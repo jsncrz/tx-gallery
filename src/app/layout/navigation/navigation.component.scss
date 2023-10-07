@@ -6,11 +6,26 @@
     right: 0;
     z-index: 1;
     display: flex;
-    height: 3.9375rem;
+    height: 4rem;
     align-items: center;
     padding: 0 1.25rem;
     background-color: var(--surface-overlay);
-    border-bottom: 1px solid var(--gray-600);
+    display:flex;
+    .logo {
+        height: 50%;
+        display: flex;
+    }
+}
+
+#side-menu {
+    .logo {
+        display: flex;
+        padding:1em;
+        img {
+            width: 100%;
+        }
+    }
+
 }
 
 .menu-icon {
@@ -18,7 +33,7 @@
 }
 
 .nav-group {
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .nav-group-header {

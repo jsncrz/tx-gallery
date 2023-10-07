@@ -51,12 +51,10 @@
 <tui-scrollbar class="photo-grid">
     <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
         <div class="photos">
-            <ng-container *ngFor="let tweet of tweets$ | async">
-                <div class="image-container clickable">
-                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
+                <div *ngFor="let tweet of tweets$ | async" class="image-container clickable">
+                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)" 
                         [src]="getTweetSmall(tweet.url)">
                 </div>
-            </ng-container>
         </div>
     </tui-loader>
 </tui-scrollbar>

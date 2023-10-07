@@ -1,7 +1,10 @@
 <div id="topbar">
-    <button class="menu-icon" icon="tuiIconMenuLarge" title="Menu" tuiIconButton tuiSlot="left" appearance="mono" type="button"
+    <button class="menu-icon" icon="tuiIconMenuLarge" title="Menu" tuiIconButton tuiSlot="left" appearance="flat" type="button"
         (click)="toggle(true)" (tuiActiveZoneChange)="toggle($event)">
         <div *tuiSidebar="open; direction: 'left'" id="side-menu">
+            <div class="logo" *ngIf="open">
+                <img src="assets/logo.png">
+            </div>
             <div class="nav-group">
                 <p class="nav-group-header tui-text_body-xs">OVERVIEW</p>
                 <p class="nav-item">
@@ -21,4 +24,7 @@
             </div>
         </div>
     </button>
+    <div class="logo" *ngIf="!open" @logoAnimation [@.disabled]="animationDisabled">
+        <img src="assets/logo.png">
+    </div>
 </div>
