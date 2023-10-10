@@ -1,63 +1,13 @@
-<div class="search-container">
-    <div [formGroup]="searchForm" class="search-row">
-        <div class="search-name">
-            <ng-container *ngIf="!character; else characterContent">
-                <tui-input *tuiLet="characters$ | async" formControlName="name" (focusedChange)="inputClicked($event)"
-                    [(tuiDropdownOpen)]="dropdownStatus">
-                    Character Name
-                    <input placeholder="Type the name of the Character" tuiTextfield />
-                    <ng-container *ngIf="characters?.length">
-                        <tui-data-list *tuiDataList>
-                            <button *ngFor="let character of characters" tuiOption (click)="onSelected(character)">
-                                <div class="dropdown-character">
-                                    <span class="character-name">
-                                        {{ character.name }}
-                                    </span>
-                                    <span class="character-tl-name">
-                                        {{ character.tlName }}
-                                    </span>
-                                </div>
-                                <tui-tag size="l" status="primary" class="tag"
-                                    [value]="'#' + character?.tag!"></tui-tag>
-                            </button>
-                        </tui-data-list>
-                    </ng-container>
-                </tui-input>
-            </ng-container>
-            <ng-template #characterContent>
-                <label tuiLabel="Character Tag" [@hideShowAnimation]>
-                    <tui-tag size="l" status="primary" class="tag" [hoverable]="true" [removable]="true"
-                        [value]="'#' + character?.tag!" (edited)="removeTag()"></tui-tag>
-                </label>
-
-
-            </ng-template>
-        </div>
-        <div class="list-sort" tuiGroup [collapsed]="true">
-            <tui-select formControlName="sortField" [valueContent]="label">
-                Sort
-                <tui-data-list-wrapper *tuiDataList [itemContent]="label" [items]="sortOptions"></tui-data-list-wrapper>
-            </tui-select>
-
-            <button class="character-sort tui-group__auto-width-item" (click)="sortOrderClicked()"
-                [icon]="sortOrder === 'desc' ? 'tuiIconArrowDown': 'tuiIconArrowUp'" tuiIconButton type="button"
-                [disabled]="(loading$ | async)!" appearance="outline"></button>
-        </div>
-    </div>
-    <ng-template #label let-item>
-        <div class="name">{{ item.label }}</div>
-    </ng-template>
-</div>
 <tui-scrollbar class="photo-grid">
     <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
         <div class="photos">
-                <div *ngFor="let tweet of tweets$ | async" class="image-container clickable">
-                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)" 
-                        [src]="getTweetSmall(tweet.url)">
-                </div>
+            <div *ngFor="let tweet of tweets$ | async" class="image-container clickable">
+                <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
+                    [src]="getTweetSmall(tweet.url)">
+            </div>
         </div>
     </tui-loader>
 </tui-scrollbar>
 <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[30,60,90]"
     [total]="(paginateDetails.totalResults$ | async)!" [page]="page"
-    (paginationChange)="paginationChanged($event)"></tui-table-pagination>
+    (paginationChange)="pageChanged($event)"></tui-table-pagination>

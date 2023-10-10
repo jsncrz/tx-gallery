@@ -1,1 +1,6 @@
-<lib-image-grid></lib-image-grid>
+<lib-gallery-search [character]="character" [characters$]="characters$" [searchForm]="searchForm"
+    [dropdownStatus]="dropdownStatus" [loading$]="loading$" [sortOrder]="sortOrder"
+    (characterSelected)="onSelected($event)" (sortOrderChanged)="sortOrderClicked()" (tagRemoved)="removeTag()"
+    (characterInputClicked)="characterInputClicked()"></lib-gallery-search>
+<lib-image-grid [limit]="limit" [page]="page" [loading$]="loading$" [tweets$]="tweets$"
+    [paginateDetails]="paginateDetails" (paginationChanged)="paginationChanged($event)"></lib-image-grid>

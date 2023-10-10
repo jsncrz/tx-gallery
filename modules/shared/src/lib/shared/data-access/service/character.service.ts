@@ -63,8 +63,12 @@ export class CharacterService extends BaseService<Character> {
             });
     }
 
+    clearAutonameResults() {
+        this.characterAutoComplete$.next([]);
+    }
+
     getAutocompleteCharacter(): Observable<Character[]> {
-        return this.characterAutoComplete$;
+        return this.characterAutoComplete$.pipe(distinctUntilChanged());
     }
 
 }
