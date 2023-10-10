@@ -80,6 +80,8 @@ export class ListComponent implements OnInit {
     this.groups.push({ label: CharacterGroup.Hololive, value: CharacterGroup.Hololive });
     this.groups.push({ label: CharacterGroup.Nijisanji, value: CharacterGroup.Nijisanji });
     this.groups.push({ label: CharacterGroup.VSPO, value: CharacterGroup.VSPO });
+    this.groups.push({ label: CharacterGroup.Neoporte, value: CharacterGroup.Neoporte });
+    this.groups.push({ label: CharacterGroup.Independent, value: CharacterGroup.Independent });
   }
 
   initSortOptions() {

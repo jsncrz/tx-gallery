@@ -19,8 +19,8 @@ import { Character } from 'shared';
     templateUrl: './gallery-search.component.html',
     styleUrls: ['./gallery-search.component.scss'],
     imports: [CommonModule, RouterModule, ReactiveFormsModule,
-        TuiLoaderModule, TuiButtonModule, TuiSelectModule,
-        TuiDataListModule, TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
+        TuiLoaderModule, TuiButtonModule, TuiSelectModule,TuiDataListModule, 
+        TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
         TuiDropdownModule, TuiTagModule, TuiLetModule, TuiLabelModule
     ],
     animations: [

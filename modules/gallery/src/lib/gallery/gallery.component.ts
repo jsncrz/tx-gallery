@@ -50,21 +50,7 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit() {
     this.initSearchForm()
-    this.tweets$ = this.twitterService.getResults();
-    this.route.queryParamMap.subscribe(
-      (params: ParamMap) => {
-        if (params.get('tag') != null && '' != params.get('tag') as string) {
-          this.character = {} as Character;
-          this.character.tag = params.get('tag') as string;
-        }
-        if (params.get('page') != null && !isNaN(parseInt(params.get('page') as string))) {
-          this.page = parseInt(params.get('page') as string);
-        }
-        this.getTweets();
-        this.paginateDetails = this.twitterService.getResultPagination();
-        this.loading$ = this.twitterService.isLoading();
-      }
-    );
+    this.initGallery()
   }
 
   /* ---------------------------- Search Functions ---------------------------- */
@@ -88,7 +74,7 @@ export class GalleryComponent implements OnInit {
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
-    this.sortOrder$.pipe(distinctUntilChanged(), debounceTime(400))
+    this.sortOrder$.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => {
         this.page = 0;
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
@@ -117,6 +103,24 @@ export class GalleryComponent implements OnInit {
   }
 
   /* ---------------------------- Gallery Functions --------------------------- */
+  initGallery() {
+    this.tweets$ = this.twitterService.getResults();
+    this.route.queryParamMap.subscribe(
+      (params: ParamMap) => {
+        if (params.get('tag') != null && '' != params.get('tag') as string) {
+          this.character = {} as Character;
+          this.character.tag = params.get('tag') as string;
+        }
+        if (params.get('page') != null && !isNaN(parseInt(params.get('page') as string))) {
+          this.page = parseInt(params.get('page') as string);
+        }
+        this.getTweets();
+        this.paginateDetails = this.twitterService.getResultPagination();
+        this.loading$ = this.twitterService.isLoading();
+      }
+    );
+  }
+  
   paginationChanged(pagination: TuiTablePagination) {
     this.limit = pagination.size;
     this.page = pagination.page;
