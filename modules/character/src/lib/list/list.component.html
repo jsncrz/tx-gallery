@@ -40,18 +40,15 @@
                     <div class="tui-text_h6 tui-space_vertical-1">{{character.name}}</div>
                     <div class="character-tl-name tui-text_body-m tui-space_vertical-1">{{character.tlName}}</div>
                     <small class="character-debut-date">Debut date: {{character.debutDate | date:'longDate'}}</small>
+                </div>
+                <div class="character-twitter">
+                    <span class="character-group">{{character.group}}</span>
+                    <button class="twitter-link" appearance="blue" tuiButton type="button" icon="tuiIconTwitter"
+                    (click)="onTwitterClicked(character.twitterLink)" [size]="'s'">Twitter Url</button>
                     <div class="tui-space_vertical-1">
                         <tui-tag status="primary" class="tag" [hoverable]="true" [value]="'#' +character.tag"
                             (click)="searchTag(character.tag)"></tui-tag>
                     </div>
-                </div>
-                <div class="character-twitter">
-                    <span class="character-group">{{character.group}}</span>
-                    <button class="character-twitter" appearance="primary" tuiButton type="button" icon="tuiIconTwitter"
-                        (click)="onTwitterClicked(character.twitterLink)" [size]="'s'">Twitter Url</button>
-                    <small class="character-last-sync">Last sync: {{character.lastSynced | date:'short'}}</small>
-                    <button class="character-sync" (click)="syncClicked(character.id)" icon="tuiIconRefreshCw"
-                        tuiIconButton type="button" appearance="flat" [size]="'s'"></button>
                 </div>
             </div>
         </tui-loader>

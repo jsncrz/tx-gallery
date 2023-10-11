@@ -36,17 +36,4 @@ export class TwitterService extends BaseService<Tweet> {
         return this.results$;
     }
 
-    syncTweet(id: string): void {
-        this.httpClient.post(`${this.resourceUrl}/sync/${id}`, {})
-            .subscribe({
-                next: () => { },
-                error: (err) => {
-                    console.error(err);
-                },
-                complete: () => {
-                    this.loading$.next(false);
-                }
-            });
-    }
-
 }

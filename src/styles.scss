@@ -187,8 +187,34 @@
     --tui-primary-hover: var(--primary-600);
     --tui-primary-active: var(--primary-700);
     --tui-primary-text: #fff;
+    --tui-accent: var(--accent-500);
+    --tui-accent-hover: var(--accent-600);
+    --tui-accent-active: var(--accent-700);
+    --tui-accent-text: #fff;
+    --tui-secondary: var(--blue-500);
+    --tui-secondary-hover: var(--blue-600);
+    --tui-secondary-active: var(--blue-700);
+    --tui-secondary-text: #fff;
 }
 
 .clickable {
     cursor: pointer;
+}
+
+[tuiWrapper][data-appearance='blue'] {
+    background: var(--blue-500);
+    color: #fff;
+}
+
+[tuiWrapper][data-appearance='blue']:hover {
+    background: var(--blue-600);
+
+}
+
+[tuiWrapper][data-appearance='blue']:active {
+    background: var(--blue-700);
+}
+
+[tuiWrapper][data-appearance='blue']:disabled {
+    background: var(--blue-200);
 }

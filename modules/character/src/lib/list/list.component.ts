@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TuiTableModule, TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
@@ -19,7 +19,7 @@ import { Character, CharacterGroup, CharacterService, PaginateDetails, TwitterSe
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [CharacterService, TwitterService]
+  providers: [CharacterService, TwitterService],
 })
 export class ListComponent implements OnInit {
   loading$!: Subject<boolean>;
@@ -90,10 +90,6 @@ export class ListComponent implements OnInit {
   initSortOptions() {
     this.sortOptions.push({ label: 'Name', value: 'tlName' });
     this.sortOptions.push({ label: 'Debut', value: 'debutDate' });
-  }
-
-  syncClicked(id: string) {
-    this.twitterService.syncTweet(id);
   }
 
   onTwitterClicked(url: string) {
