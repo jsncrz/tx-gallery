@@ -78,9 +78,12 @@ export class ListComponent implements OnInit {
   initGroups() {
     this.groups.push({ label: 'Default', value: '' });
     this.groups.push({ label: CharacterGroup.Hololive, value: CharacterGroup.Hololive });
+    this.groups.push({ label: CharacterGroup.HololiveEn, value: CharacterGroup.HololiveEn });
     this.groups.push({ label: CharacterGroup.Nijisanji, value: CharacterGroup.Nijisanji });
+    this.groups.push({ label: CharacterGroup.NijisanjiEn, value: CharacterGroup.NijisanjiEn });
     this.groups.push({ label: CharacterGroup.VSPO, value: CharacterGroup.VSPO });
     this.groups.push({ label: CharacterGroup.Neoporte, value: CharacterGroup.Neoporte });
+    this.groups.push({ label: CharacterGroup.Nanashi, value: CharacterGroup.Nanashi });
     this.groups.push({ label: CharacterGroup.Independent, value: CharacterGroup.Independent });
   }
 

@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
 import {
-    TuiLoaderModule, TuiScrollbarComponent, TuiScrollbarModule
+    TuiLinkModule,
+    TuiLoaderModule, TuiScrollbarComponent, TuiScrollbarModule, TuiSvgModule
 } from '@taiga-ui/core';
 import { Subject } from 'rxjs';
 import { PaginateDetails, Tweet, getTweetSmall } from 'shared';
@@ -10,7 +11,8 @@ import { PaginateDetails, Tweet, getTweetSmall } from 'shared';
 @Component({
     selector: 'lib-image-grid',
     standalone: true,
-    imports: [CommonModule, TuiTablePaginationModule, TuiScrollbarModule, TuiLoaderModule
+    imports: [CommonModule, TuiTablePaginationModule, TuiScrollbarModule, TuiLoaderModule,
+        TuiSvgModule, TuiLinkModule
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [],

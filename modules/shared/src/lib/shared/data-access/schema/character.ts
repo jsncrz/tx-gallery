@@ -16,8 +16,11 @@ export interface Character extends BaseObject {
 
 export enum CharacterGroup {
     Nijisanji = 'Nijisanji',
+    NijisanjiEn = 'Nijisanji EN',
     Hololive = 'Hololive',
+    HololiveEn = 'Hololive EN',
     VSPO = 'VSPO',
     Neoporte = "Neo-Porte",
+    Nanashi = "774",
     Independent = 'Independent'
 }

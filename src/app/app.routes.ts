@@ -11,4 +11,5 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('gallery').then((m) => m.GalleryComponent),
         title: 'Gallery'
     },
+    { path: '**', redirectTo: '/gallery', pathMatch: 'full' },
 ];

@@ -4,6 +4,15 @@
             <div *ngFor="let tweet of tweets$ | async" class="image-container clickable">
                 <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
                     [src]="getTweetSmall(tweet.url)">
+                <div class="tweet-detail">
+                    <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
+                        target="_blank">@{{tweet.user}}</a>
+                    <span class="like-count">
+                        <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
+                        {{tweet.likeCount}}
+                    </span>
+                    <div class="post-date">{{tweet.postDate | date:'short'}}</div>
+                </div>
             </div>
         </div>
     </tui-loader>

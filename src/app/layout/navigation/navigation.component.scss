@@ -7,59 +7,35 @@
     right: 0;
     z-index: 1;
     display: flex;
-    height: 4rem;
-    align-items: center;
+    height: 3.5rem;
+    align-items: stretch;
     padding: 0 1.25rem;
     background-color: var(--surface-overlay);
-    display:flex;
     .logo {
+        margin-right: 24px;
         height: 50%;
         display: flex;
         filter: saturate(1.5);
     }
 }
-
-#side-menu {
-    .logo {
-        display: flex;
-        padding:1em;
-        img {
-            width: 100%;
-            filter: saturate(1.5);
-        }
-    }
-
+.topbar-group {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
-
-.menu-icon {
-    color: var(--gray-500);
-}
-
-.nav-group {
-    margin-top: 2em;
-}
-
-.nav-group-header {
-    margin-left: 4px;
-    padding-left: 2rem;
-    color: var(--gray-400);
-}
-
-.nav-item:has(.active-link) {
-    border-left: 4px solid var(--primary-700);
-}
-
 .nav-item {
-    border-left: 4px solid #fff;
-    padding-left: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-
-    .nav-item-label {
+    margin: 0;
+    margin-right: 24px;
+    position: relative;
+    padding: 0;
+    height: 100%;
+    .nav-item-link {
+        align-items: center;
+        display: flex;
+        height: 100%;
         font-size: 16px;
-    }
-    .icon {
-        margin-right: 1em;
     }
 
     .nav-item-link {
@@ -70,5 +46,39 @@
     .active-link {
         color: var(--primary-700);
     }
+}
+.nav-item::after {
+    background-color: var(--primary-700);
+    content: "";
+    height: 2px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    transition: transform .15s,opacity .15s;
+    transform: translateY(-100%);
+}
+.nav-item:hover::after {
+    opacity: 1;
+    transform: translateY(-100%);
+}
 
+.nav-item:has(.active-link)::after {
+    background-color: var(--primary-700);
+    content: "";
+    height: 2px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    transition: transform .15s,opacity .15s;
+}
+.nav-item:has(.active-link):hover::after {
+    background-color: var(--primary-900);
+}
+
+.nav-item {
+    transition: 0.5s;
 }
