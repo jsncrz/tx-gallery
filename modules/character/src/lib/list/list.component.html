@@ -34,7 +34,7 @@
         <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
             <div *ngFor="let character of characters$ | async" class="character-row">
                 <div class="character-picture">
-                    <!-- <img [src]="character.pictureUrl" [alt]="character.tlName" /> -->
+                    <img [src]="character.pictureUrl" [alt]="character.tlName" />
                 </div>
                 <div class="character-detail">
                     <div class="tui-text_h6 tui-space_vertical-1">{{character.name}}</div>
