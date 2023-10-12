@@ -3,7 +3,7 @@ import { Paginate, PaginateDetails, QueryObject } from '../schema/paginate';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 export abstract class BaseService<T> {
-    protected url = 'http://localhost:3000';
+    protected url = 'http://34.130.20.27:3000/api';
     protected results$: Subject<T[]> = new Subject();
     protected authenticatedUrl: string = this.url + '/v1';
     protected resourceUrl!: string;
