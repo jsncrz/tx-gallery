@@ -19,7 +19,7 @@ import { Character, CharacterGroup, CharacterService, PaginateDetails, TwitterSe
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [CharacterService, TwitterService],
+  providers: [CharacterService],
 })
 export class ListComponent implements OnInit {
   loading$!: Subject<boolean>;
@@ -38,7 +38,6 @@ export class ListComponent implements OnInit {
   paginateDetails!: PaginateDetails;
 
   constructor(private characterService: CharacterService,
-    private twitterService: TwitterService,
     private router: Router) {
     this.initGroups();
     this.initSortOptions();

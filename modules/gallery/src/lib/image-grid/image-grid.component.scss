@@ -61,3 +61,29 @@
         color: var(--gray-500)
     }
 }
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    .photo-grid {
+        height: 70vh;
+    }
+    .photos .image-container {
+        width: 304px;
+    }
+ }
+ 
+@media all and (max-width: 768px) {
+    .photo-grid {
+        height: 70vh;
+    }
+    
+    .photos .image-container {
+        width: 90%;
+        height: 450px;
+        max-height: 45vh;
+        .prev-image {
+            position: relative;
+            height: 410px;
+            max-height: 40vh;
+        }
+    }
+}
