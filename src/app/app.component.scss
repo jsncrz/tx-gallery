@@ -9,3 +9,17 @@
 #main-layout {
     flex: 1 1 auto;
 }
+
+ 
+@media all and (max-width: 768px) {
+    #main-wrapper {
+        padding: 1rem 0.25rem;
+    }
+    .tui-island_size_m {
+        padding: 0rem;
+        border: none;
+    }
+    .tui-island_size_m::before {
+        border: none;
+    }
+}
