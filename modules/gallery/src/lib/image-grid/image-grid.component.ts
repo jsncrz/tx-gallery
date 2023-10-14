@@ -8,7 +8,7 @@ import {
 } from '@taiga-ui/core';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Subject, debounceTime } from 'rxjs';
-import { PaginateDetails, Tweet, getTweetSmall } from 'shared';
+import { PaginateDetails, ScreenSizeService, Tweet, getTweetSmall } from 'shared';
 
 @Component({
     selector: 'lib-image-grid',
@@ -25,33 +25,31 @@ export class ImageGridComponent implements OnInit {
     @ViewChild(TuiScrollbarComponent, { read: ElementRef })
     private readonly scrollBar?: ElementRef<HTMLElement>;
     debouncer: Subject<TuiTablePagination> = new Subject<TuiTablePagination>();
-
+    scrollDistance = 1;
     getTweetSmall = getTweetSmall;
-    @Input() tweets$!: Subject<Tweet[]>;
-    tweets: Tweet[] = [];
-    @Input() loading$!: Subject<boolean>;
+    isPortrait = false;
 
+    @Input() tweets$!: Subject<Tweet[]>;
+    @Input() tweets!: Tweet[];
+    @Input() loading$!: Subject<boolean>;
     @Input() limit = 30;
     @Input() page = 0;
     @Input() paginateDetails!: PaginateDetails;
     @Output() paginationChanged: EventEmitter<TuiTablePagination> = new EventEmitter();
 
-    constructor() {
-      this.debouncer
-      .pipe(debounceTime(250))
-      .subscribe((value) => this.paginationChanged.emit(value));
+    constructor(private screenSizeService: ScreenSizeService) {
+        this.isPortrait = this.screenSizeService.getIsPortrait();
+        this.debouncer
+            .pipe(debounceTime(250))
+            .subscribe((value) => this.paginationChanged.emit(value));
     }
 
     ngOnInit(): void {
-        this.tweets$.subscribe((tweets: Tweet[]) => {
-            this.tweets = [...this.tweets, ...tweets];
-            console.log(tweets);
-        });
     }
 
     onScrollDown() {
-        console.log('scrolled')
-        this.debouncer.next({page:this.page +1, size: this.limit});
+        this.debouncer.next({ page: this.page + 1, size: this.limit });
+        this.scrollDistance = this.scrollDistance / 2;
     }
 
     pageChanged(pagination: TuiTablePagination) {

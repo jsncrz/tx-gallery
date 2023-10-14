@@ -1,4 +1,4 @@
-<ng-container *ngIf="false">
+<ng-container *ngIf="!isPortrait; else mobileView">
 
     <tui-scrollbar class="photo-grid">
         <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
@@ -24,25 +24,25 @@
         (paginationChange)="pageChanged($event)"></tui-table-pagination>
 </ng-container>
 
-<div class="search-results" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="250"
-    [infiniteScrollDisabled]="(loading$ | async)!" (scrolled)="onScrollDown()">
-
-    <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
-        <div class="photos">
-            <div *ngFor="let tweet of tweets" class="image-container clickable">
-                <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
-                    [src]="getTweetSmall(tweet.url)">
-                <div class="tweet-detail">
-                    <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
-                        target="_blank">@{{tweet.user}}</a>
-                    <span class="like-count">
-                        <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
-                        {{tweet.likeCount}}
-                    </span>
-                    <div class="post-date">{{tweet.postDate | date:'short'}}</div>
+<ng-template #mobileView>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="250"
+        [infiniteScrollDisabled]="(loading$ | async)!" (scrolled)="onScrollDown()">
+        <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
+            <div class="photos">
+                <div *ngFor="let tweet of tweets" class="image-container clickable">
+                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
+                        [src]="getTweetSmall(tweet.url)">
+                    <div class="tweet-detail">
+                        <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
+                            target="_blank">@{{tweet.user}}</a>
+                        <span class="like-count">
+                            <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
+                            {{tweet.likeCount}}
+                        </span>
+                        <div class="post-date">{{tweet.postDate | date:'short'}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </tui-loader>
-
-</div>
+        </tui-loader>
+    </div>
+</ng-template>

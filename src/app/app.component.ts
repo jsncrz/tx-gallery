@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
   initBreakpointDetection() {
     if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
       this.screenService.setIsPortrait();
-      console.log(this.screenService.getIsPortrait())
     }
   }
 }

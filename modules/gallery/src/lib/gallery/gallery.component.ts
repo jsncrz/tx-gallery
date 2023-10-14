@@ -21,6 +21,7 @@ export class GalleryComponent implements OnInit {
   isPortrait = false;
   getTweetSmall = getTweetSmall;
   tweets$!: Subject<Tweet[]>;
+  tweets: Tweet[] = [];
   loading$!: Subject<boolean>;
 
   searchForm!: FormGroup;
@@ -85,11 +86,12 @@ export class GalleryComponent implements OnInit {
   }
 
   characterInputClicked() {
-      this.dropdownStatus = true;
+    this.dropdownStatus = true;
   }
 
   onSelected(character: Character): void {
     this.character = character;
+    this.tweets = [];
     this.getTweets();
   }
 
@@ -107,6 +109,9 @@ export class GalleryComponent implements OnInit {
   /* ---------------------------- Gallery Functions --------------------------- */
   initGallery() {
     this.tweets$ = this.twitterService.getResults();
+    this.tweets$.subscribe(((tweets: Tweet[]) => {
+      this.tweets = [...this.tweets, ...tweets];
+    }));
     this.route.queryParamMap.subscribe(
       (params: ParamMap) => {
         if (params.get('tag') != null && '' != params.get('tag') as string) {
@@ -122,7 +127,7 @@ export class GalleryComponent implements OnInit {
       }
     );
   }
-  
+
   paginationChanged(pagination: TuiTablePagination) {
     this.limit = pagination.size;
     this.page = pagination.page;
