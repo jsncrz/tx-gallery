@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { TuiTablePagination } from '@taiga-ui/addon-table';
 import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
-import { Character, CharacterService, PaginateDetails, Tweet, TwitterService, getTweetSmall } from 'shared';
+import { Character, CharacterService, PaginateDetails, ScreenSizeService, Tweet, TwitterService, getTweetSmall } from 'shared';
 import { GallerySearchComponent } from '../gallery-search/gallery-search.component';
 import { ImageGridComponent } from '../image-grid/image-grid.component';
 
@@ -14,11 +14,11 @@ import { ImageGridComponent } from '../image-grid/image-grid.component';
   imports: [CommonModule, RouterModule, ReactiveFormsModule,
     GallerySearchComponent, ImageGridComponent
   ],
-  providers: [TwitterService, CharacterService],
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
 })
 export class GalleryComponent implements OnInit {
+  isPortrait = false;
   getTweetSmall = getTweetSmall;
   tweets$!: Subject<Tweet[]>;
   loading$!: Subject<boolean>;
@@ -37,6 +37,7 @@ export class GalleryComponent implements OnInit {
 
   constructor(private twitterService: TwitterService,
     private characterService: CharacterService,
+    private screenSizeService: ScreenSizeService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location
@@ -49,6 +50,7 @@ export class GalleryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isPortrait = this.screenSizeService.getIsPortrait();
     this.initSearchForm()
     this.initGallery()
   }
@@ -63,7 +65,7 @@ export class GalleryComponent implements OnInit {
       .subscribe((name) => {
         this.dropdownStatus = false;
         if (name?.length > 2) {
-          this.characterService.getTagsByName(name);
+          this.characterService.getCharactersByName(name, '');
         } else {
           this.characterService.clearAutonameResults();
         }
@@ -135,11 +137,13 @@ export class GalleryComponent implements OnInit {
       tag = this.character.tag;
     }
     this.twitterService.getTweets(filter, this.sort, this.limit, this.page + 1);
-    const url = this.router.createUrlTree([], {
-      relativeTo: this.route, queryParams:
-        { tag: tag, page: this.page }
-    }).toString()
-    this.location.go(url);
+    if (!this.screenSizeService.getIsPortrait()) {
+      const url = this.router.createUrlTree([], {
+        relativeTo: this.route, queryParams:
+          { tag: tag, page: this.page }
+      }).toString()
+      this.location.go(url);
+    }
   }
 
 }

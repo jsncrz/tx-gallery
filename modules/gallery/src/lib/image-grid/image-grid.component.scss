@@ -73,17 +73,16 @@
  
 @media all and (max-width: 768px) {
     .photo-grid {
-        height: 73vh;
+        height: 80vh;
     }
     
     .photos .image-container {
         width: 95%;
-        height: 450px;
-        max-height: 45vh;
+        height: 100%;
         .prev-image {
             position: relative;
-            height: 410px;
-            max-height: 40vh;
+            height: 100%;
+            min-height: 10vh;
         }
     }
 }

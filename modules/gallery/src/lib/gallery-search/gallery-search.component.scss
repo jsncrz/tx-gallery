@@ -39,3 +39,8 @@
         flex-flow: column wrap;
     }
 }
+@media all and (max-width: 768px) {
+    .character-list {
+        height: 80vh;
+    }
+}
