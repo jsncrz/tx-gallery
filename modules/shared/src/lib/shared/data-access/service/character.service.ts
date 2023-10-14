@@ -47,8 +47,8 @@ export class CharacterService extends BaseService<Character> {
             }));
     }
 
-    getTagsByName(name: string) {
-        this.httpClient.get<Character[]>(`${this.resourceUrl}/getTagsByName?name=${name}`)
+    getCharactersByName(name: string, group: string) {
+        this.httpClient.get<Character[]>(`${this.resourceUrl}/getCharactersByName?name=${name}&group=${group}`)
             .pipe(first())
             .subscribe({
                 next: (result) => {

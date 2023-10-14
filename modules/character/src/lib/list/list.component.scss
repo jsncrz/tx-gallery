@@ -115,8 +115,20 @@
         flex-flow: column wrap;
     }
 
-    .character-row {
+   
+}
 
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    .character-list {
+        height: 63vh;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .character-list {
+        height: 80vh;
+    }
+    .character-row {
         .character-picture {
             flex: 0 100%;
             text-align: center;
@@ -132,18 +144,6 @@
             justify-content: center;
             align-content: center;
         }
-    }
-}
-
-@media all and (min-width: 768px) and (max-width: 1024px) {
-    .character-list {
-        height: 63vh;
-    }
-}
-
-@media all and (max-width: 768px) {
-    .character-list {
-        height: 63vh;
     }
 }
 

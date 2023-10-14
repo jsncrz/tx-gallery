@@ -218,3 +218,7 @@
 [tuiWrapper][data-appearance='blue']:disabled {
     background: var(--blue-200);
 }
+
+.t-header {
+    background: none !important;
+}

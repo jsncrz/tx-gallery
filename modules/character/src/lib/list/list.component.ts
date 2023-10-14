@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TuiTableModule, TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
 import { TuiButtonModule, TuiDataListModule, TuiGroupModule, TuiLoaderModule, TuiScrollbarModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
+import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-
-import { Character, CharacterGroup, CharacterService, PaginateDetails, TwitterService } from 'shared';
+import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenSizeService } from 'shared';
 
 @Component({
   selector: 'lib-list',
@@ -15,16 +14,17 @@ import { Character, CharacterGroup, CharacterService, PaginateDetails, TwitterSe
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,
     TuiLoaderModule, TuiTableModule, TuiTablePaginationModule, TuiTagModule, TuiButtonModule, TuiSelectModule,
     TuiDataListModule, TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
-    TuiScrollbarModule
+    TuiScrollbarModule, TuiAccordionModule 
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [CharacterService],
 })
 export class ListComponent implements OnInit {
   loading$!: Subject<boolean>;
   saving$!: Subject<boolean>;
   searchForm!: FormGroup;
+
+  isPortrait = false;
 
   characters$!: Subject<Character[]>;
   limit = 30;
@@ -38,12 +38,15 @@ export class ListComponent implements OnInit {
   paginateDetails!: PaginateDetails;
 
   constructor(private characterService: CharacterService,
-    private router: Router) {
+    private router: Router,
+    private screenSizeService: ScreenSizeService) {
     this.initGroups();
     this.initSortOptions();
   }
 
   ngOnInit() {
+    this.isPortrait = this.screenSizeService.getIsPortrait();
+    console.log(this.isPortrait);
     this.initSearchForm();
     this.characters$ = this.characterService.getResults();
     this.getCharacter();

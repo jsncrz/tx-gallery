@@ -9,7 +9,7 @@ import {
     TuiLoaderModule,
     TuiTextfieldControllerModule
 } from '@taiga-ui/core';
-import { TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
+import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
 import { Observable, Subject } from 'rxjs';
 import { Character } from 'shared';
 
@@ -21,7 +21,7 @@ import { Character } from 'shared';
     imports: [CommonModule, RouterModule, ReactiveFormsModule,
         TuiLoaderModule, TuiButtonModule, TuiSelectModule,TuiDataListModule, 
         TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
-        TuiDropdownModule, TuiTagModule, TuiLetModule, TuiLabelModule
+        TuiDropdownModule, TuiTagModule, TuiLetModule, TuiLabelModule, TuiAccordionModule
     ],
     animations: [
         trigger('hideShowAnimation', [
@@ -36,6 +36,8 @@ import { Character } from 'shared';
     ]
 })
 export class GallerySearchComponent implements OnInit {
+    @Input() isPortrait!: boolean;
+    
     @Input() loading$!: Subject<boolean>;
 
     @Input() searchForm!: FormGroup;

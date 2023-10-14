@@ -3,12 +3,12 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
     {
         path: 'characters',
-        loadComponent: () => import('characters').then((m) => m.CharactersComponent),
+        loadChildren: () => import('characters').then(mod => mod.CHARACTERS_ROUTE),
         title: 'Characters'
     },
     {
         path: 'gallery',
-        loadComponent: () => import('gallery').then((m) => m.GalleryComponent),
+        loadChildren: () => import('gallery').then(mod => mod.GALLERY_ROUTES),
         title: 'Gallery'
     },
     { path: '**', redirectTo: '/gallery', pathMatch: 'full' },
