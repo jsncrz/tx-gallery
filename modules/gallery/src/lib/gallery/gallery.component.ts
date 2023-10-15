@@ -74,12 +74,14 @@ export class GalleryComponent implements OnInit {
     this.searchForm.get('sortField')?.valueChanges.pipe(distinctUntilChanged())
       .subscribe(() => {
         this.page = 0;
+        this.tweets = [];
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
     this.sortOrder$.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => {
         this.page = 0;
+        this.tweets = [];
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
