@@ -201,6 +201,7 @@
     cursor: pointer;
 }
 
+// Twitter link style
 [tuiWrapper][data-appearance='blue'] {
     background: var(--blue-500);
     color: #fff;
@@ -217,6 +218,26 @@
 
 [tuiWrapper][data-appearance='blue']:disabled {
     background: var(--blue-200);
+}
+
+// Burger menu style
+
+[tuiWrapper][data-appearance='burger'] {
+    background: #fff;
+    color: var(--primary-500);
+}
+
+[tuiWrapper][data-appearance='blue']:hover {
+    color: var(--primary-600);
+
+}
+
+[tuiWrapper][data-appearance='blue']:active {
+    background: var(--blue-700);
+}
+
+[tuiWrapper][data-appearance='blue']:disabled {
+    background: var(--blue-400);
 }
 
 .t-header {

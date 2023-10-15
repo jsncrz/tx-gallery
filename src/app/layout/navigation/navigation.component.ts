@@ -20,6 +20,7 @@ export class NavigationComponent implements AfterViewInit {
 
   animationDisabled = true;
   open = false;
+
   toggle(open: boolean): void {
     this.open = open;
   }
