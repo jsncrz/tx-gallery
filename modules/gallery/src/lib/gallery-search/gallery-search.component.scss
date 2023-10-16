@@ -7,10 +7,14 @@
 }
 
 .search-row {
-    flex: 0.5;
+    flex: 0.6;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
+
+    .search-group {
+        flex: 1;
+    }
 
     .search-name {
         flex: 2;
