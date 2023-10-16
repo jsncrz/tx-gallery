@@ -10,6 +10,12 @@
 <ng-template #searchContainer>
     <div class="search-container">
         <div [formGroup]="searchForm" class="search-row">
+            <div class="search-group">
+                <tui-select formControlName="group" [valueContent]="label">
+                    Group
+                    <tui-data-list-wrapper *tuiDataList [itemContent]="label" [items]="groups"></tui-data-list-wrapper>
+                </tui-select>
+            </div>
             <div class="search-name">
                 <ng-container *ngIf="!character; else characterContent">
                     <tui-input *tuiLet="characters$ | async as characters" formControlName="name"

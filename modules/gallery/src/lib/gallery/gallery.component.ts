@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { TuiTablePagination } from '@taiga-ui/addon-table';
 import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
-import { Character, CharacterService, PaginateDetails, ScreenSizeService, Tweet, TwitterService, getTweetSmall } from 'shared';
+import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenSizeService, Tweet, TwitterService, getTweetSmall } from 'shared';
 import { GallerySearchComponent } from '../gallery-search/gallery-search.component';
 import { ImageGridComponent } from '../image-grid/image-grid.component';
 
@@ -25,6 +25,7 @@ export class GalleryComponent implements OnInit {
   loading$!: Subject<boolean>;
 
   searchForm!: FormGroup;
+  groups: { label: string, value: string }[] = [];
   dropdownStatus = false;
   sort = 'postDate:desc';
   character: Character | null = null;
@@ -52,21 +53,31 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit() {
     this.isPortrait = this.screenSizeService.getIsPortrait();
-    this.initSearchForm()
-    this.initGallery()
+    this.initSearchForm();
+    this.initGroups();
+    this.initGallery();
   }
 
   /* ---------------------------- Search Functions ---------------------------- */
   initSearchForm() {
     this.searchForm = new FormGroup({
       name: new FormControl(''),
+      group: new FormControl({ label: 'Default', value: '' }),
       sortField: new FormControl({ label: 'Post Date', value: 'postDate' }),
     });
+    this.searchForm.get('group')?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((group) => { 
+        if (group.value !== '' && this.character?.group != group.value) {
+          this.character = null;
+          this.searchForm.get('name')?.setValue('');
+        }
+        this.getTweets(); 
+      });
     this.searchForm.get('name')?.valueChanges.pipe(debounceTime(400))
       .subscribe((name) => {
         this.dropdownStatus = false;
         if (name?.length > 2) {
-          this.characterService.getCharactersByName(name, '');
+          this.characterService.getCharactersByName(name, this.searchForm.get('group')?.value?.value || '');
         } else {
           this.characterService.clearAutonameResults();
         }
@@ -85,6 +96,19 @@ export class GalleryComponent implements OnInit {
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
+  }
+
+  // TODO: Make this generic
+  initGroups() {
+    this.groups.push({ label: 'Default', value: '' });
+    this.groups.push({ label: CharacterGroup.Hololive, value: CharacterGroup.Hololive });
+    this.groups.push({ label: CharacterGroup.HololiveEn, value: CharacterGroup.HololiveEn });
+    this.groups.push({ label: CharacterGroup.Nijisanji, value: CharacterGroup.Nijisanji });
+    this.groups.push({ label: CharacterGroup.NijisanjiEn, value: CharacterGroup.NijisanjiEn });
+    this.groups.push({ label: CharacterGroup.VSPO, value: CharacterGroup.VSPO });
+    this.groups.push({ label: CharacterGroup.Neoporte, value: CharacterGroup.Neoporte });
+    this.groups.push({ label: CharacterGroup.Nanashi, value: CharacterGroup.Nanashi });
+    this.groups.push({ label: CharacterGroup.Independent, value: CharacterGroup.Independent });
   }
 
   characterInputClicked() {
@@ -142,6 +166,9 @@ export class GalleryComponent implements OnInit {
     if (this.character != null) {
       filter.push(`tags=${this.character.tag}`);
       tag = this.character.tag;
+    }
+    if (this.searchForm.get('group') != null && this.searchForm.get('group')?.value != '' && this.searchForm.get('group')?.value?.value != '') {
+      filter.push(`group=${this.searchForm.get('group')?.value?.value}`);
     }
     this.twitterService.getTweets(filter, this.sort, this.limit, this.page + 1);
     if (!this.screenSizeService.getIsPortrait()) {

@@ -42,6 +42,7 @@ export class GallerySearchComponent implements OnInit {
 
     @Input() searchForm!: FormGroup;
     @Input() dropdownStatus = false;
+    @Input() groups: { label: string, value: string }[] = [];
     sortOptions: { label: string, value: string }[] = [];
     @Input() character: Character | null = null;
     @Input() sortOrder: 'asc' | 'desc' = 'desc';
