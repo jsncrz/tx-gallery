@@ -67,6 +67,7 @@ export class GalleryComponent implements OnInit {
     });
     this.searchForm.get('group')?.valueChanges.pipe(distinctUntilChanged())
       .subscribe((group) => { 
+        this.clearResultPagination();
         if (group.value !== '' && this.character?.group != group.value) {
           this.character = null;
           this.searchForm.get('name')?.setValue('');
@@ -84,15 +85,13 @@ export class GalleryComponent implements OnInit {
       });
     this.searchForm.get('sortField')?.valueChanges.pipe(distinctUntilChanged())
       .subscribe(() => {
-        this.page = 0;
-        this.tweets = [];
+        this.clearResultPagination();
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
     this.sortOrder$.pipe(debounceTime(400), distinctUntilChanged())
       .subscribe(() => {
-        this.page = 0;
-        this.tweets = [];
+        this.clearResultPagination();
         this.sort = this.searchForm.get('sortField')?.value?.value + ':' + this.sortOrder;
         this.getTweets();
       });
@@ -117,7 +116,7 @@ export class GalleryComponent implements OnInit {
 
   onSelected(character: Character): void {
     this.character = character;
-    this.tweets = [];
+    this.clearResultPagination();
     this.getTweets();
   }
 
@@ -133,6 +132,10 @@ export class GalleryComponent implements OnInit {
   }
 
   /* ---------------------------- Gallery Functions --------------------------- */
+  clearResultPagination() {
+    this.page = 0;
+    this.tweets = [];
+  }
   initGallery() {
     this.tweets$ = this.twitterService.getResults();
     this.tweets$.subscribe(((tweets: Tweet[]) => {
