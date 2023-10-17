@@ -1,5 +1,5 @@
 import { Route } from "@angular/router";
-import { CharacterService, ScreenSizeService, TwitterService } from "shared";
+import { CharacterService, TwitterService } from "shared";
 import { GalleryComponent } from "./gallery/gallery.component";
 
 export const GALLERY_ROUTES: Route[] = [{
@@ -7,7 +7,6 @@ export const GALLERY_ROUTES: Route[] = [{
     providers: [
       CharacterService,
       TwitterService,
-      ScreenSizeService
     ],
     children: [
       {path: '', component: GalleryComponent},

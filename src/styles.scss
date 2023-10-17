@@ -181,8 +181,8 @@
 
 // tui override
 :root {
-    --tui-link: var(--primary-500) !important;
-    --tui-link-hover: var(--primary-300) !important;
+    --tui-link: var(--primary-500);
+    --tui-link-hover: var(--primary-300);
     --tui-primary: var(--primary-500);
     --tui-primary-hover: var(--primary-600);
     --tui-primary-active: var(--primary-700);
@@ -227,17 +227,17 @@
 // Burger menu style
 
 [tuiWrapper][data-appearance='burger'] {
-    background: #fff;
-    color: var(--primary-500);
+    background: var(--tui-base-01);
+    color: var(--tui-primary);
 }
 
 [tuiWrapper][data-appearance='burger']:hover {
-    color: var(--primary-600);
+    color: var(--tui-primary-hover);
 
 }
 
 [tuiWrapper][data-appearance='burger']:active {
-    background: var(--blue-700);
+    background: var(--tui-primary-active);
 }
 
 [tuiWrapper][data-appearance='burger']:disabled {

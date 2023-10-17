@@ -12,7 +12,7 @@ import {
 import { TuiItemsWithMoreModule, TuiTagModule } from '@taiga-ui/kit';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Subject, debounceTime } from 'rxjs';
-import { PaginateDetails, ScreenSizeService, Tweet, getTweetSmall } from 'shared';
+import { PaginateDetails, ScreenService, Tweet, getTweetSmall } from 'shared';
 
 @Component({
     selector: 'lib-image-grid',
@@ -32,7 +32,6 @@ export class ImageGridComponent {
     debouncer: Subject<TuiTablePagination> = new Subject<TuiTablePagination>();
     scrollDistance = 1;
     getTweetSmall = getTweetSmall;
-    isPortrait = false;
 
     @Input() tweets$!: Subject<Tweet[]>;
     @Input() tweets!: Tweet[];
@@ -42,8 +41,7 @@ export class ImageGridComponent {
     @Input() paginateDetails!: PaginateDetails;
     @Output() paginationChanged: EventEmitter<TuiTablePagination> = new EventEmitter();
 
-    constructor(private screenSizeService: ScreenSizeService) {
-        this.isPortrait = this.screenSizeService.getIsPortrait();
+    constructor(private screenService: ScreenService) {
         this.debouncer
             .pipe(debounceTime(250))
             .subscribe((value) => this.paginationChanged.emit(value));
@@ -65,5 +63,9 @@ export class ImageGridComponent {
 
     clickImage(user: string, tweetId: string) {
         window.open(`https://twitter.com/${user}/status/${tweetId}`, "_blank");
+    }
+
+    get isPortrait() {
+        return this.screenService.getIsPortrait() || this.screenService.getScrollMode() === 'endless';
     }
 }

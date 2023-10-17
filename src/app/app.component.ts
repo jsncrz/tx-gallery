@@ -1,25 +1,29 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TuiAlertModule, TuiDialogModule, TuiRootModule } from "@taiga-ui/core";
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { TuiAlertModule, TuiBrightness, TuiDialogModule, TuiModeModule, TuiRootModule, TuiThemeNightModule } from "@taiga-ui/core";
 import { TuiIslandModule } from '@taiga-ui/kit';
+import { ScreenService } from 'shared';
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { ScreenSizeService } from 'shared';
-import { BreakpointObserver } from '@angular/cdk/layout';
+
 @Component({
   standalone: true,
-  imports: [RouterModule, TuiRootModule, TuiDialogModule, TuiAlertModule, TuiIslandModule,
-            NavigationComponent],
+  imports: [CommonModule, RouterModule, TuiRootModule, TuiDialogModule, TuiAlertModule, TuiIslandModule,
+    TuiThemeNightModule, TuiModeModule,
+    NavigationComponent],
   selector: 'vg-root',
-  providers: [ScreenSizeService],
+  providers: [ScreenService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'VT Gallery';
 
-  constructor(private screenService: ScreenSizeService,
-    private breakpointObserver: BreakpointObserver){}
-  
+  constructor(private screenService: ScreenService,
+    private breakpointObserver: BreakpointObserver) { }
+
   ngOnInit(): void {
     this.initBreakpointDetection();
   }
@@ -28,5 +32,9 @@ export class AppComponent implements OnInit {
     if (this.breakpointObserver.isMatched('(max-width: 768px)')) {
       this.screenService.setIsPortrait();
     }
+  }
+
+  get mode(): TuiBrightness | null {
+    return this.screenService.getTheme();
   }
 }

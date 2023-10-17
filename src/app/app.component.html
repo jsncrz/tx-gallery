@@ -1,4 +1,6 @@
-<tui-root>
+<tui-theme-night *ngIf="mode === 'onDark'"></tui-theme-night>
+ 
+<tui-root [tuiMode]="mode">
     <vg-navigation></vg-navigation>
     <div id="main-wrapper">
         <div id="main-layout">
