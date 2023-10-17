@@ -12,6 +12,30 @@
     background-color: var(--surface-overlay);
 }
 
+#sidebar-menu {
+    display: flex;
+    height: 3rem;
+    align-items: stretch;
+    padding: 0 1.25rem;
+    flex-flow: row wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.sidemenu-icon {
+    animation: rotateMenu 750ms;
+}
+
+@keyframes rotateMenu {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 #topbar-side {
     display: none;
 
@@ -147,6 +171,7 @@
     #topbar {
         height: 3rem;
     }
+
     #topbar-side {
         display: flex;
         flex-flow: row wrap;

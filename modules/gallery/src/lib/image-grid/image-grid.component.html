@@ -1,23 +1,6 @@
 <ng-container *ngIf="!isPortrait; else mobileView">
-
     <tui-scrollbar class="photo-grid">
-        <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
-            <div class="photos">
-                <div *ngFor="let tweet of tweets$ | async" class="image-container clickable">
-                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
-                        [src]="getTweetSmall(tweet.url)">
-                    <div class="tweet-detail">
-                        <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
-                            target="_blank">@{{tweet.user}}</a>
-                        <span class="like-count">
-                            <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
-                            {{tweet.likeCount}}
-                        </span>
-                        <div class="post-date">{{tweet.postDate | date:'short'}}</div>
-                    </div>
-                </div>
-            </div>
-        </tui-loader>
+        <ng-container *ngTemplateOutlet="imageContainer; context: { $implicit: (tweets$ | async)}"></ng-container>
     </tui-scrollbar>
     <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[30,60,90]"
         [total]="(paginateDetails.totalResults$ | async)!" [page]="page"
@@ -25,24 +8,51 @@
 </ng-container>
 
 <ng-template #mobileView>
-    <div class="search-results" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="250"
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="500"
         [infiniteScrollDisabled]="(loading$ | async)!" (scrolled)="onScrollDown()">
-        <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
-            <div class="photos">
-                <div *ngFor="let tweet of tweets" class="image-container clickable">
-                    <img class="prev-image" (click)="clickImage(tweet.user, tweet.tweetId)"
-                        [src]="getTweetSmall(tweet.url)">
-                    <div class="tweet-detail">
-                        <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
-                            target="_blank">@{{tweet.user}}</a>
-                        <span class="like-count">
-                            <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
-                            {{tweet.likeCount}}
-                        </span>
-                        <div class="post-date">{{tweet.postDate | date:'short'}}</div>
-                    </div>
+        <ng-container *ngTemplateOutlet="imageContainer; context: {$implicit: tweets}"></ng-container>
+    </div>
+    
+</ng-template>
+
+<ng-template let-tweets #imageContainer>
+    <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
+        <div class="photos">
+            <div *ngFor="let tweet of tweets" class="image-container">
+                <img class="prev-image clickable" (click)="clickImage(tweet.user, tweet.tweetId)"
+                    [src]="getTweetSmall(tweet.url)">
+                <div class="tweet-detail">
+                    <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
+                        target="_blank">@{{tweet.user}}</a>
+                    <span class="like-count">
+                        <tui-svg class="heart" src="tuiIconHeart"></tui-svg>
+                        {{tweet.likeCount}}
+                    </span>
+                    <div class="post-date">{{tweet.postDate | date:'short'}}</div>
+                </div>
+                <div class="tweet-tags">
+                    <tui-items-with-more [required]="3">
+                        <ng-container *ngFor="let tag of tweet.tags">
+                            <tui-tag *tuiItem size="s" status="primary" class="tui-space_right-1" [value]="'#' +tag"></tui-tag>
+                        </ng-container>
+                        <ng-template let-lastIndex tuiMore>
+                            <tui-hosted-dropdown
+                                class="item"
+                                [content]="dropdown"
+                            >
+                            <tui-tag size="s" status="info" class="tui-space_right-1 clickable" value="More"></tui-tag>
+                            <ng-template #dropdown>
+                                <div class="dropdown-tags">
+                                    <ng-container *ngFor="let tag of tweet.tags; let index = index">
+                                        <tui-tag *ngIf="index > lastIndex" size="s" status="primary" class="tui-space_right-1" [value]="'#' +tag"></tui-tag>
+                                    </ng-container>
+                                </div>
+                            </ng-template>
+                            </tui-hosted-dropdown>
+                        </ng-template>
+                    </tui-items-with-more>
                 </div>
             </div>
-        </tui-loader>
-    </div>
+        </div>
+    </tui-loader>
 </ng-template>

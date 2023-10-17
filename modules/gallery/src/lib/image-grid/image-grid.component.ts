@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
 import { TuiScrollService } from '@taiga-ui/cdk';
 import {
+    TuiDataListModule,
+    TuiDropdownModule,
+    TuiHostedDropdownModule,
     TuiLinkModule,
     TuiLoaderModule, TuiScrollbarComponent, TuiScrollbarModule, TuiSvgModule
 } from '@taiga-ui/core';
+import { TuiItemsWithMoreModule, TuiTagModule } from '@taiga-ui/kit';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Subject, debounceTime } from 'rxjs';
 import { PaginateDetails, ScreenSizeService, Tweet, getTweetSmall } from 'shared';
@@ -14,14 +18,15 @@ import { PaginateDetails, ScreenSizeService, Tweet, getTweetSmall } from 'shared
     selector: 'lib-image-grid',
     standalone: true,
     imports: [CommonModule, TuiTablePaginationModule, TuiScrollbarModule, TuiLoaderModule,
-        TuiSvgModule, TuiLinkModule, InfiniteScrollModule
+        TuiSvgModule, TuiLinkModule, InfiniteScrollModule, TuiItemsWithMoreModule, TuiTagModule, TuiDropdownModule,
+        TuiHostedDropdownModule, TuiDataListModule
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TuiScrollService],
     templateUrl: './image-grid.component.html',
     styleUrls: ['./image-grid.component.scss'],
 })
-export class ImageGridComponent implements OnInit {
+export class ImageGridComponent {
     @ViewChild(TuiScrollbarComponent, { read: ElementRef })
     private readonly scrollBar?: ElementRef<HTMLElement>;
     debouncer: Subject<TuiTablePagination> = new Subject<TuiTablePagination>();
@@ -42,9 +47,6 @@ export class ImageGridComponent implements OnInit {
         this.debouncer
             .pipe(debounceTime(250))
             .subscribe((value) => this.paginationChanged.emit(value));
-    }
-
-    ngOnInit(): void {
     }
 
     onScrollDown() {

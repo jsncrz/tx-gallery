@@ -3,6 +3,11 @@
         <button class="menu-icon" icon="tuiIconMenuLarge" title="Menu" tuiIconButton tuiSlot="left" appearance="burger" size="xs"
             type="button" (click)="toggle(true)" (tuiActiveZoneChange)="toggle($event)">
             <div *tuiSidebar="open; direction: 'left'" id="side-menu">
+                <div id="sidebar-menu">
+                    <button class="sidemenu-icon" [class.visible]="open" icon="tuiIconClose" title="Close" tuiIconButton tuiSlot="left" appearance="burger" size="xs"
+                        type="button" (click)="toggle(false)">
+                    </button>
+                </div>
                 <div class="nav-group">
                     <p class="nav-group-header tui-text_body-xs">OVERVIEW</p>
                     <p class="nav-item">

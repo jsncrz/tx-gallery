@@ -46,7 +46,6 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.isPortrait = this.screenSizeService.getIsPortrait();
-    console.log(this.isPortrait);
     this.initSearchForm();
     this.characters$ = this.characterService.getResults();
     this.getCharacter();

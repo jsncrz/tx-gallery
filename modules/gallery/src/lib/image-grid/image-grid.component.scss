@@ -17,7 +17,7 @@
     flex: 0 0 auto;
     padding: 0;
     margin: 0;
-    height: 350px;
+    height: 380px;
     width: 304px;
 
     .prev-image {
@@ -45,10 +45,20 @@
         .post-date {
             font-size: 0.70em;
             color: var(--gray-500);
-            line-height: 0;
+            margin-top: -10px
         }
     }
 
+}
+
+.dropdown-tags{
+    padding: 10px;
+    display: flex;  
+    flex-flow: column wrap;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 
 .dropdown-character {

@@ -127,6 +127,7 @@ export class GalleryComponent implements OnInit {
 
   removeTag() {
     this.character = null;
+    this.clearResultPagination();
     this.searchForm.get('name')?.reset();
     this.getTweets();
   }
