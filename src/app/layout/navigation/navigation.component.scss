@@ -9,7 +9,7 @@
     height: 3.5rem;
     align-items: stretch;
     padding: 0 1.25rem;
-    background-color: var(--surface-overlay);
+    background-color: var(--tui-base-01);
 }
 
 #sidebar-menu {
@@ -60,11 +60,11 @@
     }
 
     .nav-item:has(.active-link) {
-        border-left: 4px solid var(--primary-700);
+        border-left: 4px solid var(--tui-primary-active);
     }
 
     .nav-item {
-        border-left: 4px solid #fff;
+        border-left: 4px solid #fff0;
         padding-left: 2rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -78,12 +78,10 @@
         }
 
         .nav-item-link {
-            --tui-link: var(--gray-500) !important;
-            --tui-link-hover: var(--primary-300) !important;
         }
 
         .active-link {
-            color: var(--primary-700);
+            color: var(--tui-primary-active);
         }
 
     }
@@ -118,17 +116,17 @@
         }
 
         .nav-item-link {
-            --tui-link: var(--gray-500) !important;
-            --tui-link-hover: var(--primary-300) !important;
+            --tui-link: var(--gray-500);
+            --tui-link-hover: var(--tui-primary);
         }
 
         .active-link {
-            color: var(--primary-700);
+            color: var(--tui-primary-active);
         }
     }
 
     .nav-item::after {
-        background-color: var(--primary-700);
+        background-color: var(--tui-primary-active);
         content: "";
         height: 2px;
         left: 0;
@@ -146,7 +144,7 @@
     }
 
     .nav-item:has(.active-link)::after {
-        background-color: var(--primary-700);
+        background-color: var(--tui-primary-active);
         content: "";
         height: 2px;
         left: 0;
@@ -158,7 +156,7 @@
     }
 
     .nav-item:has(.active-link):hover::after {
-        background-color: var(--primary-900);
+        background-color: var(--tui-primary-active);
     }
 
     .nav-item {
@@ -166,6 +164,26 @@
     }
 }
 
+
+.topbar-end {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.menu-dropdown {
+    padding: 0.75rem;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: stretch;
+    gap: 0.25rem;
+
+}
 
 @media all and (max-width: 768px) {
     #topbar {

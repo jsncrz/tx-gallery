@@ -6,7 +6,7 @@ import { TuiTableModule, TuiTablePagination, TuiTablePaginationModule } from '@t
 import { TuiButtonModule, TuiDataListModule, TuiGroupModule, TuiLoaderModule, TuiScrollbarModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenSizeService } from 'shared';
+import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenService } from 'shared';
 
 @Component({
   selector: 'lib-list',
@@ -24,7 +24,6 @@ export class ListComponent implements OnInit {
   saving$!: Subject<boolean>;
   searchForm!: FormGroup;
 
-  isPortrait = false;
 
   characters$!: Subject<Character[]>;
   limit = 30;
@@ -39,13 +38,12 @@ export class ListComponent implements OnInit {
 
   constructor(private characterService: CharacterService,
     private router: Router,
-    private screenSizeService: ScreenSizeService) {
+    private screenService: ScreenService) {
     this.initGroups();
     this.initSortOptions();
   }
 
   ngOnInit() {
-    this.isPortrait = this.screenSizeService.getIsPortrait();
     this.initSearchForm();
     this.characters$ = this.characterService.getResults();
     this.getCharacter();
@@ -126,6 +124,10 @@ export class ListComponent implements OnInit {
 
   searchTag(tag: string) {
     this.router.navigateByUrl(`gallery?tag=${tag}`);
+  }
+
+  get isPortrait() {
+    return this.screenService.getIsPortrait();
   }
 
 }
