@@ -197,9 +197,13 @@
     --tui-secondary-text: #fff;
 }
 
+.no-pointer {
+    pointer-events: none;
+}
 .clickable {
     cursor: pointer;
 }
+
 
 // Twitter link style
 [tuiWrapper][data-appearance='blue'] {
@@ -227,19 +231,24 @@
     color: var(--primary-500);
 }
 
-[tuiWrapper][data-appearance='blue']:hover {
+[tuiWrapper][data-appearance='burger']:hover {
     color: var(--primary-600);
 
 }
 
-[tuiWrapper][data-appearance='blue']:active {
+[tuiWrapper][data-appearance='burger']:active {
     background: var(--blue-700);
 }
 
-[tuiWrapper][data-appearance='blue']:disabled {
+[tuiWrapper][data-appearance='burger']:disabled {
     background: var(--blue-400);
 }
 
 .t-header {
     background: none !important;
+}
+
+.search-accordion {
+    position: fixed;
+    margin-bottom: 0.5rem;
 }
