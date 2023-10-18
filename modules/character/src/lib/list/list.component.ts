@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
   columns = ['pictureUrl', 'tlName', 'group']
   groups: { label: string, value: string }[] = [];
   sortOptions: { label: string, value: string }[] = [];
-  paginateDetails$!: Subject<PaginateDetails>;
+  paginateDetails$: Subject<PaginateDetails> | undefined;
 
   constructor(private characterService: CharacterService,
     private router: Router,

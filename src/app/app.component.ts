@@ -7,12 +7,13 @@ import { TuiAlertModule, TuiBrightness, TuiDialogModule, TuiModeModule, TuiRootM
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { ScreenService } from 'shared';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+import { DarkThemeComponent } from './layout/theme/dark-theme/dark-theme.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TuiRootModule, TuiDialogModule, TuiAlertModule, TuiIslandModule,
     TuiThemeNightModule, TuiModeModule,
-    NavigationComponent],
+    NavigationComponent, DarkThemeComponent],
   selector: 'vg-root',
   providers: [ScreenService],
   templateUrl: './app.component.html',

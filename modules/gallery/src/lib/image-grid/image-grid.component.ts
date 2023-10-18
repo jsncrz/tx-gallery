@@ -38,7 +38,7 @@ export class ImageGridComponent {
     @Input() loading$!: Subject<boolean>;
     @Input() limit = 30;
     @Input() page = 0;
-    @Input() paginateDetails!: PaginateDetails;
+    @Input() paginateDetails: PaginateDetails | undefined;
     @Output() paginationChanged: EventEmitter<TuiTablePagination> = new EventEmitter();
 
     constructor(private screenService: ScreenService) {
@@ -48,7 +48,7 @@ export class ImageGridComponent {
     }
 
     onScrollDown() {
-        if (this.paginateDetails.totalPages > this.page + 1) {
+        if (this.paginateDetails && this.paginateDetails.totalPages > this.page + 1) {
             this.debouncer.next({ page: this.page + 1, size: this.limit });
             this.scrollDistance = this.scrollDistance / 2;
         }

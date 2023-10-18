@@ -11,7 +11,6 @@
         <div class="search-container">
             <div [formGroup]="searchForm" class="search-row">
                 <div class="search-group">
-    
                     <tui-select formControlName="group" [valueContent]="label">
                         Group
                         <tui-data-list-wrapper *tuiDataList [itemContent]="label" [items]="groups"></tui-data-list-wrapper>
@@ -64,6 +63,6 @@
         </tui-loader>
     </tui-scrollbar>
     <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[15,30,45,60]"
-        [total]="(paginateDetails$ | async)!.totalResults"
+        [total]="(paginateDetails$ | async)?.totalResults || 0"
         (paginationChange)="paginationChanged($event)"></tui-table-pagination>
 </div>
