@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
 import { TuiActiveZoneModule } from '@taiga-ui/cdk';
-import { TuiButtonModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule, TuiTooltipModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiToggleModule } from '@taiga-ui/kit';
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ScreenService } from 'shared';
 
 @Component({
@@ -14,7 +15,8 @@ import { ScreenService } from 'shared';
   imports: [CommonModule, RouterModule,
     TuiAccordionModule, TuiSidebarModule, TuiActiveZoneModule, TuiLinkModule, TuiSvgModule,
     TuiButtonModule, TuiHostedDropdownModule, TuiDropdownModule, TuiToggleModule,
-    FormsModule
+    TuiTooltipModule,
+    FormsModule,
   ],
   providers: [ScreenService],
   templateUrl: './navigation.component.html',
@@ -24,8 +26,20 @@ export class NavigationComponent implements AfterViewInit {
 
   animationDisabled = true;
   open = false;
+  private darkMode$: Subject<boolean> = new Subject();
+  private endlessMode$: Subject<boolean> = new Subject();
 
-  constructor(private screenService: ScreenService) {}
+  constructor(private screenService: ScreenService) {
+      this.darkMode$
+            .pipe(debounceTime(250), distinctUntilChanged())
+            .subscribe((value) => this.screenService.setTheme(value ? 'onDark' : ''));
+      this.endlessMode$
+            .pipe(debounceTime(1000), distinctUntilChanged())
+            .subscribe((value) => {
+              window.location.reload();
+              this.screenService.setScrollMode(value ? 'endless' : '');
+            });
+    }
 
   toggle(open: boolean): void {
     this.open = open;
@@ -40,7 +54,7 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   set darkMode(value) {
-    this.screenService.setTheme(value ? 'onDark' : '')
+    this.darkMode$.next(value);
   }
 
   get endlessScroll() {
@@ -48,6 +62,7 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   set endlessScroll(value) {
-    this.screenService.setScrollMode(value ? 'endless' : '')
+    this.endlessMode$.next(value);
   }
+
 }
