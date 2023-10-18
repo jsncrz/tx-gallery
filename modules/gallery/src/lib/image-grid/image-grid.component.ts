@@ -48,8 +48,10 @@ export class ImageGridComponent {
     }
 
     onScrollDown() {
-        this.debouncer.next({ page: this.page + 1, size: this.limit });
-        this.scrollDistance = this.scrollDistance / 2;
+        if (this.paginateDetails.totalPages > this.page + 1) {
+            this.debouncer.next({ page: this.page + 1, size: this.limit });
+            this.scrollDistance = this.scrollDistance / 2;
+        }
     }
 
     pageChanged(pagination: TuiTablePagination) {
@@ -65,7 +67,7 @@ export class ImageGridComponent {
         window.open(`https://twitter.com/${user}/status/${tweetId}`, "_blank");
     }
 
-    get isPortrait() {
-        return this.screenService.getIsPortrait() || this.screenService.getScrollMode() === 'endless';
+    get isEndlessScroll() {
+        return this.screenService.getIsEndlessScroll();
     }
 }

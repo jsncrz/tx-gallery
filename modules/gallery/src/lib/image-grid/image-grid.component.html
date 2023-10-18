@@ -1,9 +1,9 @@
-<ng-container *ngIf="!isPortrait; else mobileView">
+<ng-container *ngIf="!isEndlessScroll; else mobileView">
     <tui-scrollbar class="photo-grid">
         <ng-container *ngTemplateOutlet="imageContainer; context: { $implicit: (tweets$ | async)}"></ng-container>
     </tui-scrollbar>
     <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[30,60,90]"
-        [total]="(paginateDetails.totalResults$ | async)!" [page]="page"
+        [total]="paginateDetails.totalResults" [page]="page"
         (paginationChange)="pageChanged($event)"></tui-table-pagination>
 </ng-container>
 

@@ -9,9 +9,9 @@ export interface Paginate<T> {
 }
 
 export interface PaginateDetails {
-    page$: Subject<number>,
-    totalPages$: Subject<number>,
-    totalResults$: Subject<number>,
+    page: number,
+    totalPages: number,
+    totalResults: number,
 }
 
 export interface QueryObject {

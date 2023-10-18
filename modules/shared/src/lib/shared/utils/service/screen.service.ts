@@ -23,6 +23,7 @@ export class ScreenService {
 
     setIsPortrait() {
         this.isPortrait = true;
+        this.storageItem.next({key: 'scrollMode', value:'endless'});
     }
 
     setTheme(theme: TuiBrightness | '') {
@@ -36,14 +37,18 @@ export class ScreenService {
     }
 
     getTheme(): TuiBrightness | null  {
-        return this.storage.getItem('darkMode') as TuiBrightness;
+        return this.darkMode as TuiBrightness;
     }
 
     getScrollMode(): string | null  {
-        return this.storage.getItem('scrollMode');
+        return this.scrollMode;
     }
 
     getIsPortrait() {
         return this.isPortrait;
+    }
+
+    getIsEndlessScroll() {
+        return Boolean(this.getScrollMode() != null && this.getScrollMode() === 'endless');
     }
 }

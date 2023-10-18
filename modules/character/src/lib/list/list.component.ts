@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
   columns = ['pictureUrl', 'tlName', 'group']
   groups: { label: string, value: string }[] = [];
   sortOptions: { label: string, value: string }[] = [];
-  paginateDetails!: PaginateDetails;
+  paginateDetails$!: Subject<PaginateDetails>;
 
   constructor(private characterService: CharacterService,
     private router: Router,
@@ -47,7 +47,7 @@ export class ListComponent implements OnInit {
     this.initSearchForm();
     this.characters$ = this.characterService.getResults();
     this.getCharacter();
-    this.paginateDetails = this.characterService.getResultPagination();
+    this.paginateDetails$ = this.characterService.getResultPagination();
     this.loading$ = this.characterService.isLoading();
     this.saving$ = this.characterService.isSaving();
   }

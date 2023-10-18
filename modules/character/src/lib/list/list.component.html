@@ -64,6 +64,6 @@
         </tui-loader>
     </tui-scrollbar>
     <tui-table-pagination class="tui-space_top-2" [(size)]="limit" [items]="[15,30,45,60]"
-        [total]="(paginateDetails.totalResults$ | async)!"
+        [total]="(paginateDetails$ | async)!.totalResults"
         (paginationChange)="paginationChanged($event)"></tui-table-pagination>
 </div>
