@@ -34,7 +34,7 @@ export class GalleryComponent implements OnInit {
 
   limit = 30;
   page = 0;
-  paginateDetails!: PaginateDetails;
+  paginateDetails$!: Subject<PaginateDetails>;
 
   constructor(private twitterService: TwitterService,
     private characterService: CharacterService,
@@ -146,11 +146,13 @@ export class GalleryComponent implements OnInit {
           this.character = {} as Character;
           this.character.tag = params.get('tag') as string;
         }
-        if (params.get('page') != null && !isNaN(parseInt(params.get('page') as string))) {
-          this.page = parseInt(params.get('page') as string);
+        if (!this.screenService.getIsEndlessScroll()) {
+          if (params.get('page') != null && !isNaN(parseInt(params.get('page') as string))) {
+            this.page = parseInt(params.get('page') as string);
+          }
         }
         this.getTweets();
-        this.paginateDetails = this.twitterService.getResultPagination();
+        this.paginateDetails$ = this.twitterService.getResultPagination();
         this.loading$ = this.twitterService.isLoading();
       }
     );
@@ -173,13 +175,17 @@ export class GalleryComponent implements OnInit {
       filter.push(`group=${this.searchForm.get('group')?.value?.value}`);
     }
     this.twitterService.getTweets(filter, this.sort, this.limit, this.page + 1);
-    if (!this.screenService.getIsPortrait()) {
-      const url = this.router.createUrlTree([], {
-        relativeTo: this.route, queryParams:
-          { tag: tag, page: this.page }
-      }).toString()
-      this.location.go(url);
+    if (!this.screenService.getIsEndlessScroll()) {
+      this.setUrlRoute(tag);
     }
+  }
+
+  setUrlRoute(tag: string) {
+    const url = this.router.createUrlTree([], {
+      relativeTo: this.route, queryParams:
+        { tag: tag, page: this.page }
+    }).toString()
+    this.location.go(url);
   }
   
   get isPortrait() {

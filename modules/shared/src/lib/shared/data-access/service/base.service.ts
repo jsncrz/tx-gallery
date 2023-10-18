@@ -10,16 +10,23 @@ export abstract class BaseService<T> {
     protected loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     protected saving$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     protected currentPage$: Subject<number> = new Subject();
+    protected currentPage = 0;
     protected totalPages$: Subject<number> = new Subject();
+    protected totalPages = 0
     protected totalResults$: Subject<number> = new Subject();
+    protected totalResults = 0
     protected filterBy = '';
     protected filterOption: string[] = [];
     protected sortBy = '';
     protected limit = 10;
     protected page = 0;
+    private paginateDetails: Subject<PaginateDetails> = new Subject();
 
     constructor(protected httpClient: HttpClient, protected resource: string) {
         this.resourceUrl = `${this.authenticatedUrl}/${resource}`;
+        this.currentPage$.subscribe((currentPage) => this.currentPage = currentPage);
+        this.totalPages$.subscribe((totalPages) => this.totalPages = totalPages);
+        this.totalResults$.subscribe((totalResults) => this.totalResults = totalResults);
      }
 
     isLoading(): Subject<boolean> {
@@ -30,12 +37,8 @@ export abstract class BaseService<T> {
         return this.saving$;
     }
 
-    getResultPagination(): PaginateDetails {
-        return {
-            page$: this.currentPage$,
-            totalPages$: this.totalPages$,
-            totalResults$: this.totalResults$
-        };
+    getResultPagination(): Subject<PaginateDetails> {
+        return this.paginateDetails;
     }
 
     createQueryObject(filterOption: string[], sortBy: string, limit: number, page: number): QueryObject {
@@ -58,9 +61,11 @@ export abstract class BaseService<T> {
 
     setPaginateResults(result: Paginate<T>) {
         this.results$.next(result.results);
-        this.currentPage$.next(result.page);
-        this.totalPages$.next(result.totalPages);
-        this.totalResults$.next(result.totalResults);
+        this.paginateDetails.next({
+            page: result.page,
+            totalPages: result.totalPages,
+            totalResults: result.totalResults
+        });
     }
 
     getResults(): Subject<T[]> {
