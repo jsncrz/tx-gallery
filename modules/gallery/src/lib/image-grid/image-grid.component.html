@@ -19,8 +19,11 @@
     <tui-loader [overlay]="true" [showLoader]="(loading$ | async)!">
         <div class="photos">
             <div *ngFor="let tweet of tweets" class="image-container">
-                <img class="prev-image clickable" (click)="clickImage(tweet.user, tweet.tweetId)"
+                <img *ngIf="!tweet.url.includes('video')" class="prev-image clickable" (click)="clickImage(tweet.user, tweet.tweetId)"
                     [src]="getTweetSmall(tweet.url)">
+                <video *ngIf="tweet.url.includes('video')" muted autoplay loop class="prev-image clickable" (click)="clickImage(tweet.user, tweet.tweetId)">
+                    <source [src]="tweet.url" type="video/mp4">
+                </video>
                 <div class="tweet-detail">
                     <a tuiLink class="user-link" [href]="'https://twitter.com/' + tweet.user"
                         target="_blank">@{{tweet.user}}</a>
