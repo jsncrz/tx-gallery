@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
 import { TuiScrollService } from '@taiga-ui/cdk';
 import {
@@ -26,7 +26,7 @@ import { PaginateDetails, ScreenService, Tweet, getTweetSmall } from 'shared';
     templateUrl: './image-grid.component.html',
     styleUrls: ['./image-grid.component.scss'],
 })
-export class ImageGridComponent {
+export class ImageGridComponent implements OnInit {
     @ViewChild(TuiScrollbarComponent, { read: ElementRef })
     private readonly scrollBar?: ElementRef<HTMLElement>;
     debouncer: Subject<TuiTablePagination> = new Subject<TuiTablePagination>();
@@ -47,10 +47,16 @@ export class ImageGridComponent {
             .subscribe((value) => this.paginationChanged.emit(value));
     }
 
+    ngOnInit(): void {
+        this.scrollDistance = 1;
+    }
+
     onScrollDown() {
         if (this.paginateDetails && this.paginateDetails.totalPages > this.page + 1) {
             this.debouncer.next({ page: this.page + 1, size: this.limit });
-            this.scrollDistance = this.scrollDistance / 2;
+            if (this.scrollDistance > 0.001) {
+                this.scrollDistance = this.scrollDistance / 2;
+            }
         }
     }
 
