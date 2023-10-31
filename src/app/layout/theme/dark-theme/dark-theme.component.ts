@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { AbstractTuiThemeSwitcher } from '@taiga-ui/cdk';
 
 @Component({
   selector: 'vg-dark-theme',
@@ -8,4 +9,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DarkThemeComponent {}
+export class DarkThemeComponent extends AbstractTuiThemeSwitcher {}
