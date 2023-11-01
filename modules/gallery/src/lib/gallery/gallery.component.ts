@@ -135,6 +135,7 @@ export class GalleryComponent implements OnInit {
     this.page = 0;
     this.tweets = [];
   }
+
   initGallery() {
     this.tweets$ = this.twitterService.getResults();
     this.tweets$.subscribe(((tweets: Tweet[]) => {
@@ -168,7 +169,10 @@ export class GalleryComponent implements OnInit {
     const filter: string[] = [];
     let tag = '';
     if (this.character != null) {
-      filter.push(`tags=${this.character.tag}`);
+      filter.push(`tags=${this.character.tag}&`);
+      if (this.character.id != null) {
+        filter.push(`characters=${this.character.id}&`)
+      }
       tag = this.character.tag;
     }
     if (this.searchForm.get('group') != null && this.searchForm.get('group')?.value != '' && this.searchForm.get('group')?.value?.value != '') {

@@ -1,6 +1,7 @@
 import { BaseObject } from "./base.object";
 
 export interface Character extends BaseObject {
+    id: string;
     name: string;
     tlName: string;
     twitterLink: string;
