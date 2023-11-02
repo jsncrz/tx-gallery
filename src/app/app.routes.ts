@@ -1,7 +1,14 @@
 import { Route } from '@angular/router';
+import { TuiDialogService } from '@taiga-ui/core';
 import { ScreenService } from 'shared';
 
 export const appRoutes: Route[] = [
+    {
+        path: '',
+        loadChildren: () => import('home').then(mod => mod.HOME_ROUTE),
+        title: 'Home',
+        providers: [ScreenService, TuiDialogService],
+    },
     {
         path: 'characters',
         loadChildren: () => import('characters').then(mod => mod.CHARACTERS_ROUTE),
@@ -14,5 +21,5 @@ export const appRoutes: Route[] = [
         title: 'Gallery',
         providers: [ScreenService]
     },
-    { path: '**', redirectTo: '/gallery', pathMatch: 'full' },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

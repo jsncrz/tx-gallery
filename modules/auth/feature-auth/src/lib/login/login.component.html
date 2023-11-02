@@ -1,0 +1,26 @@
+<div class="auth-wrapper">
+    <header>
+        Sign in
+    </header>
+    <form class="auth-form-wrapper" [formGroup]="loginForm">
+        <div class="auth-form">
+            <label tuiLabel="Email">
+                <tui-input formControlName="email" [tuiTextfieldLabelOutside]="true">
+                    <input tuiTextfield type="email" />
+                </tui-input>
+            </label>
+            <label tuiLabel="Password">
+                <tui-input-password formControlName="password" [tuiTextfieldLabelOutside]="true">
+                    <input placeholder="********" tuiTextfield />
+                </tui-input-password>
+            </label>
+            <button class="auth-action-button" tuiButton type="button" (click)="login()">
+                Sign in
+            </button>
+        </div>
+    </form>
+    <div class="divider"></div>
+    <footer>
+        No Account? <span class="auth-change-action" (click)="signUpClicked()">Sign Up</span>
+    </footer>
+</div>

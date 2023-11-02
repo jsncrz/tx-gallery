@@ -167,6 +167,8 @@
     --primary-700: #482980;
     --primary-800: #392065;
     --primary-900: #291749;
+    --primary-1000: #190D31;
+    --primary-1100: #0F0721;
     --accent-50: #fdeff4;
     --accent-100: #fad7e3;
     --accent-200: #f7bdd1;
@@ -179,8 +181,13 @@
     --accent-900: #e24b75;
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('assets/Montserrat-Regular.ttf');
+}
 // tui override
 :root {
+    --tui-text-font: 'Montserrat';
     --tui-link: var(--primary-500);
     --tui-link-hover: var(--primary-300);
     --tui-primary: var(--primary-500);
@@ -197,51 +204,43 @@
     --tui-secondary-text: #fff;
 }
 
-.no-pointer {
-    pointer-events: none;
-}
-.clickable {
-    cursor: pointer;
-}
-
-
 // Twitter link style
 [tuiWrapper][data-appearance='blue'] {
     background: var(--blue-500);
     color: #fff;
-}
 
-[tuiWrapper][data-appearance='blue']:hover {
-    background: var(--blue-600);
+    &:hover {
+        background: var(--blue-600);
+    }
 
-}
+    &:active {
+        background: var(--blue-700);
+    }
 
-[tuiWrapper][data-appearance='blue']:active {
-    background: var(--blue-700);
-}
-
-[tuiWrapper][data-appearance='blue']:disabled {
-    background: var(--blue-200);
+    &:disabled {
+        background: var(--blue-200);
+    }
 }
 
 // Burger menu style
-
 [tuiWrapper][data-appearance='burger'] {
     background: var(--tui-base-01);
     color: var(--tui-primary);
-}
+    transition: all .5s;
 
-[tuiWrapper][data-appearance='burger']:hover {
-    color: var(--tui-primary-hover);
+    &:hover {
+        color: var(--tui-primary-hover);
+        transform: scale(1.1);
+        transition: all .5s;
+    }
 
-}
+    &:active {
+        background: var(--tui-primary-active);
+    }
 
-[tuiWrapper][data-appearance='burger']:active {
-    background: var(--tui-primary-active);
-}
-
-[tuiWrapper][data-appearance='burger']:disabled {
-    background: var(--blue-400);
+    &:disabled {
+        background: var(--blue-400);
+    }
 }
 
 .t-header {
@@ -251,4 +250,16 @@
 .search-accordion {
     position: fixed;
     margin-bottom: 0.5rem;
+}
+
+.no-pointer {
+    pointer-events: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.divider {
+  border-top: 1px solid var(--primary-100);
 }

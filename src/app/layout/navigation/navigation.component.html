@@ -11,10 +11,11 @@
                 <div class="nav-group">
                     <p class="nav-group-header tui-text_body-xs">OVERVIEW</p>
                     <p class="nav-item">
-                        <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters"
-                            (click)="toggle(false)" routerLinkActive="active-link">
-                            <tui-svg src="tuiIconSmileLarge" class="icon"></tui-svg>
-                            <span class="nav-item-label">Character</span>
+                        <a class="nav-item-link" tuiLink routerLink="/" (click)="toggle(false)"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive="active-link">
+                            <tui-svg src="tuiIconImageLarge" class="icon"></tui-svg>
+                            <span class="nav-item-label">Home</span>
                         </a>
                     </p>
                     <p class="nav-item">
@@ -24,21 +25,29 @@
                             <span class="nav-item-label">Gallery</span>
                         </a>
                     </p>
+                    <p class="nav-item">
+                        <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters"
+                            (click)="toggle(false)" routerLinkActive="active-link">
+                            <tui-svg src="tuiIconSmileLarge" class="icon"></tui-svg>
+                            <span class="nav-item-label">Character</span>
+                        </a>
+                    </p>
                 </div>
             </div>
         </button>
-        <div class="logo">
+        <div class="logo clickable" tuiLink routerLink="/">
             <img src="assets/logo.png">
         </div>
     </div>
     <div class="topbar-group">
-        <div class="logo">
+        <div class="logo clickable" tuiLink routerLink="/" >
             <img src="assets/logo.png">
         </div>
         <div class="nav-item">
-            <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters" (click)="toggle(false)"
+            <a class="nav-item-link" tuiLink routerLink="/" (click)="toggle(false)"
+                [routerLinkActiveOptions]="{ exact: true }"
                 routerLinkActive="active-link">
-                Character
+                Home
             </a>
         </div>
         <div class="nav-item">
@@ -47,8 +56,15 @@
                 Gallery
             </a>
         </div>
+        <div class="nav-item">
+            <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters" (click)="toggle(false)"
+                routerLinkActive="active-link">
+                Character
+            </a>
+        </div>
     </div>
     <div class="topbar-end">
+        <lib-auth-nav-option></lib-auth-nav-option>
         <tui-hosted-dropdown [content]="menuDropdown">
             <button class="menu-icon" icon="tuiIconMoreVertical" title="more" tuiIconButton appearance="burger"
                 size="xs" type="button">

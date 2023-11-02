@@ -15,8 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "auth/data-access": ["modules/auth/data-access/src/index.ts"],
+      "auth/feature-auth": ["modules/auth/feature-auth/src/index.ts"],
       "characters": ["modules/character/src/index.ts"],
       "gallery": ["modules/gallery/src/index.ts"],
+      "home": ["modules/home/src/index.ts"],
       "shared": ["modules/shared/src/index.ts"]
     }
   },

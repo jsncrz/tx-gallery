@@ -1,0 +1,41 @@
+<div class="auth-wrapper">
+    <header>
+        Sign up
+    </header>
+    <form class="auth-form-wrapper" [formGroup]="registerForm">
+        <div class="auth-form">
+
+            <label tuiLabel="Email">
+                <tui-input formControlName="email" [tuiTextfieldLabelOutside]="true">
+                    <input tuiTextfield type="email" />
+                </tui-input>
+
+                <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+            </label>
+            <label tuiLabel="Password">
+                <tui-input-password formControlName="password" [tuiTextfieldLabelOutside]="true">
+                    <input placeholder="Make it secure!" tuiTextfield />
+                </tui-input-password>
+
+                <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+            </label>
+            <label tuiLabel="Confirm Password">
+                <tui-input-password formControlName="confirmPassword" [tuiTextfieldLabelOutside]="true">
+                    <input placeholder="*********" tuiTextfield />
+                </tui-input-password>
+
+                <tui-error formControlName="confirmPassword" [error]="[] | tuiFieldError | async"></tui-error>
+                <tui-error
+                    *ngIf="registerForm.errors?.['passwordMismatch'] && (registerForm.touched || registerForm.dirty)"
+                    error="Confirm password must be the same as your Password!"></tui-error>
+            </label>
+            <button class="auth-action-button" tuiButton type="button" (click)="register()">
+                Sign in
+            </button>
+        </div>
+    </form>
+    <div class="divider"></div>
+    <footer>
+        Already have an account? <span class="auth-change-action" (click)="loginClicked()">Sign in</span>
+    </footer>
+</div>

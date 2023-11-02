@@ -6,6 +6,7 @@ import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
 import { TuiActiveZoneModule } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule, TuiTooltipModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiToggleModule } from '@taiga-ui/kit';
+import { AuthNavOptionComponent } from 'auth/feature-auth';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ScreenService } from 'shared';
 
@@ -17,6 +18,7 @@ import { ScreenService } from 'shared';
     TuiButtonModule, TuiHostedDropdownModule, TuiDropdownModule, TuiToggleModule,
     TuiTooltipModule,
     FormsModule,
+    AuthNavOptionComponent
   ],
   providers: [ScreenService],
   templateUrl: './navigation.component.html',
