@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { TuiAlertModule, TuiBrightness, TuiDialogModule, TuiModeModule, TuiRootModule, TuiThemeNightModule } from "@taiga-ui/core";
 import { TuiIslandModule } from '@taiga-ui/kit';
-import { ScreenService } from 'shared';
+import { ScreenService } from '@vgallery/shared';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DarkThemeComponent } from './layout/theme/dark-theme/dark-theme.component';
 
