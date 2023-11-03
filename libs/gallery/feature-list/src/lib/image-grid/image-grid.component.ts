@@ -10,9 +10,11 @@ import {
     TuiLoaderModule, TuiScrollbarComponent, TuiScrollbarModule, TuiSvgModule
 } from '@taiga-ui/core';
 import { TuiItemsWithMoreModule, TuiTagModule } from '@taiga-ui/kit';
+import { PaginateDetails } from '@vgallery/core/api-types';
+import { ScreenService } from '@vgallery/core/settings';
+import { Tweet, getTweetSmall } from '@vgallery/gallery/data-access';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Subject, debounceTime } from 'rxjs';
-import { PaginateDetails, ScreenService, Tweet, getTweetSmall } from '@vgallery/shared';
 
 @Component({
     selector: 'lib-image-grid',

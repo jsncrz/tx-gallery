@@ -8,7 +8,7 @@ import { TuiActiveZoneModule } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule, TuiTooltipModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiToggleModule } from '@taiga-ui/kit';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { ScreenService } from '@vgallery/shared';
+import { ScreenService } from '@vgallery/core/settings';
 
 @Component({
   selector: 'vg-navigation',

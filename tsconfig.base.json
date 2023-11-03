@@ -18,12 +18,22 @@
       "@vgallery/*": ["libs/*"],
       "@vgallery/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@vgallery/auth/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
-      "@vgallery/characters/feature-list": ["libs/character/feature-list/src/index.ts"],
-      "@vgallery/gallery/feature-list": [ "libs/gallery/feature-list/src/index.ts"],
-      "@vgallery/home/feature-home": ["libs/home/feature-home/src/index.ts"],
-      "@vgallery/shared": ["libs/shared/src/index.ts"],
+      "@vgallery/character/data-access": [
+        "libs/character/data-access/src/index.ts"
+      ],
+      "@vgallery/characters/feature-list": [
+        "libs/character/feature-list/src/index.ts"
+      ],
       "@vgallery/core/api-types": ["libs/core/api-types/src/index.ts"],
-      "@vgallery/core/http-client": ["libs/core/http-client/src/index.ts"]
+      "@vgallery/core/http-client": ["libs/core/http-client/src/index.ts"],
+      "@vgallery/core/settings": ["libs/core/settings/src/index.ts"],
+      "@vgallery/gallery/data-access": [
+        "libs/gallery/data-access/src/index.ts"
+      ],
+      "@vgallery/gallery/feature-list": [
+        "libs/gallery/feature-list/src/index.ts"
+      ],
+      "@vgallery/home/feature-home": ["libs/home/feature-home/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

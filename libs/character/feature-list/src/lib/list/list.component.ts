@@ -5,8 +5,10 @@ import { Router, RouterModule } from '@angular/router';
 import { TuiTableModule, TuiTablePagination, TuiTablePaginationModule } from '@taiga-ui/addon-table';
 import { TuiButtonModule, TuiDataListModule, TuiGroupModule, TuiLoaderModule, TuiScrollbarModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
+import { Character, CharacterGroup, CharacterService } from '@vgallery/character/data-access';
+import { PaginateDetails } from '@vgallery/core/api-types';
+import { ScreenService } from '@vgallery/core/settings';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenService } from '@vgallery/shared';
 
 @Component({
   selector: 'lib-list',
@@ -14,7 +16,7 @@ import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenSer
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,
     TuiLoaderModule, TuiTableModule, TuiTablePaginationModule, TuiTagModule, TuiButtonModule, TuiSelectModule,
     TuiDataListModule, TuiDataListWrapperModule, TuiTextfieldControllerModule, TuiGroupModule, TuiInputModule,
-    TuiScrollbarModule, TuiAccordionModule 
+    TuiScrollbarModule, TuiAccordionModule
   ],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],

@@ -3,8 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { TuiTablePagination } from '@taiga-ui/addon-table';
+import { Character, CharacterGroup, CharacterService } from '@vgallery/character/data-access';
+import { PaginateDetails } from '@vgallery/core/api-types';
+import { ScreenService } from '@vgallery/core/settings';
+import { Tweet, TwitterService, getTweetSmall } from '@vgallery/gallery/data-access';
 import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
-import { Character, CharacterGroup, CharacterService, PaginateDetails, ScreenService, Tweet, TwitterService, getTweetSmall } from '@vgallery/shared';
 import { GallerySearchComponent } from '../gallery-search/gallery-search.component';
 import { ImageGridComponent } from '../image-grid/image-grid.component';
 

@@ -1,13 +1,12 @@
 import { Route } from '@angular/router';
-import { TuiDialogService } from '@taiga-ui/core';
-import { ScreenService } from '@vgallery/shared';
+import { ScreenService } from '@vgallery/core/settings/src';
 
 export const appRoutes: Route[] = [
     {
         path: '',
         loadChildren: () => import('@vgallery/home/feature-home').then(mod => mod.HOME_ROUTE),
         title: 'Home',
-        providers: [ScreenService, TuiDialogService],
+        providers: [ScreenService],
     },
     {
         path: 'characters',

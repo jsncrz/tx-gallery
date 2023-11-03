@@ -11,7 +11,7 @@ import {
 } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiDataListWrapperModule, TuiInputModule, TuiSelectModule, TuiTagModule } from '@taiga-ui/kit';
 import { Observable, Subject } from 'rxjs';
-import { Character } from '@vgallery/shared';
+import { Character } from '@vgallery/character/data-access';
 
 @Component({
     selector: 'lib-gallery-search',
