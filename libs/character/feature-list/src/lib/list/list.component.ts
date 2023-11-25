@@ -26,7 +26,6 @@ export class ListComponent implements OnInit {
   saving$!: Subject<boolean>;
   searchForm!: FormGroup;
 
-
   characters$!: Subject<Character[]>;
   limit = 30;
   page = 0;

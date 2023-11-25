@@ -30,6 +30,7 @@ tui-dialog[data-appearance='auth-dialog'] {
     padding: 1em;
     display: flex;
     flex-flow: column nowrap;
+    color: var(--black-900);
 
     header {
         font-size: 1.25em;
