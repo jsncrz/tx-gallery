@@ -1,0 +1,68 @@
+.login-button {
+    [tuiWrapper][data-appearance='flat'] {
+
+        &:active {
+            background: none !important;
+        }
+
+        &:hover {
+            background: none !important;
+            transform: scale(1.05);
+            transition: all .5s;
+        }
+    }
+}
+
+tui-dialog[data-appearance='auth-dialog'] {
+    border: none;
+    min-height: 30vh;
+    background: #fff;
+
+    border-radius: 5px;
+    color: var(--tui-text-01);
+
+    .t-content {
+        background: none;
+    }
+}
+
+.auth-wrapper {
+    padding: 1em;
+    display: flex;
+    flex-flow: column nowrap;
+    color: var(--black-900);
+
+    header {
+        font-size: 1.25em;
+        color: var(--tui-primary);
+        margin-bottom: 1em;
+    }
+
+
+    footer {
+        font-size: 0.75em;
+        margin-top: 2em;
+        .auth-change-action {
+            color: var(--tui-link);
+            cursor: pointer;
+    
+            &:hover {
+                color: var(--tui-link-hover);
+            }
+        }
+
+    }
+
+    .auth-form-wrapper {
+        padding: 1em 0em;
+    }
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+        row-gap: 0.75em;
+
+    }
+    
+}

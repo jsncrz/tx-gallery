@@ -1,3 +1,4 @@
+import { AuthNavOptionComponent } from '@vgallery/auth/feature-auth';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +8,7 @@ import { TuiActiveZoneModule } from '@taiga-ui/cdk';
 import { TuiButtonModule, TuiDropdownModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule, TuiTooltipModule } from '@taiga-ui/core';
 import { TuiAccordionModule, TuiToggleModule } from '@taiga-ui/kit';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { ScreenService } from 'shared';
+import { ScreenService } from '@vgallery/core/settings';
 
 @Component({
   selector: 'vg-navigation',
@@ -17,6 +18,7 @@ import { ScreenService } from 'shared';
     TuiButtonModule, TuiHostedDropdownModule, TuiDropdownModule, TuiToggleModule,
     TuiTooltipModule,
     FormsModule,
+    AuthNavOptionComponent
   ],
   providers: [ScreenService],
   templateUrl: './navigation.component.html',

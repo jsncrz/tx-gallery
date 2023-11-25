@@ -1,6 +1,6 @@
 :root {
-    --tui-base-01: #222;
-    --tui-base-02: #333;
+    --tui-base-01: var(--primary-1100);
+    --tui-base-02: var(--primary-1000);
     --tui-base-03: #808080;
     --tui-base-04: #959595;
     --tui-base-05: #b0b0b0;
@@ -34,8 +34,8 @@
     --tui-text-01: #ffffff;
     --tui-text-02: rgba(255, 255, 255, .72);
     --tui-text-03: rgba(255, 255, 255, .6);
-    --tui-link: #6788ff;
-    --tui-link-hover: #526ed3;
+    --tui-link: var(--primary-500);
+    --tui-link-hover: var(--primary-300);
     --tui-positive: #44c596;
     --tui-positive-hover: #3aa981;
     --tui-negative: #ff8c67;
@@ -45,6 +45,6 @@
     --tui-elevation-02: #222;
 
     --tui-primary: var(--primary-500);
-    --tui-primary-hover: var(--primary-700);
+    --tui-primary-hover: var(--primary-400);
     --tui-primary-active: var(--primary-300);
 }

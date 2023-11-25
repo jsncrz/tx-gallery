@@ -1,0 +1,11 @@
+<button class="login-button" size="s" tuiButton type="button" appearance="flat" (click)="showDialog(template, 'login')">
+    Sign In
+</button>
+<button class="login-button" size="s" tuiButton type="button" appearance="flat" (click)="showDialog(template, 'signup')">
+    Sign Up
+</button>
+
+<ng-template #template>
+    <lib-login *ngIf="fromButton === 'login'" (clickedSignup)="clickedAuthAction('signup')"></lib-login>
+    <lib-register *ngIf="fromButton === 'signup'" (clickedLogin)="clickedAuthAction('login')"></lib-register>
+</ng-template>
