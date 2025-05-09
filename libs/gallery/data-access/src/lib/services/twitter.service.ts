@@ -9,7 +9,7 @@ import { Tweet } from '../models/tweet';
 export class TwitterService extends BaseService<Tweet> {
 
     constructor(httpClient: HttpClient) {
-        super(httpClient, 'twitter');
+        super(httpClient, 'tweets');
     }
 
     private refreshTweets(filter: string[], sortBy: string, limit: number, page: number) {
