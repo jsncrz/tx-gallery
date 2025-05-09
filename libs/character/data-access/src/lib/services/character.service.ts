@@ -10,7 +10,7 @@ export class CharacterService extends BaseService<Character> {
     private characterAutoComplete$: Subject<Character[]> = new Subject();
 
     constructor(httpClient: HttpClient) {
-        super(httpClient, 'character');
+        super(httpClient, 'characters');
     }
 
     private refreshCharacter(filter: string[], sortBy: string, limit: number, page: number) {
@@ -48,7 +48,7 @@ export class CharacterService extends BaseService<Character> {
     }
 
     getCharactersByName(name: string, group: string) {
-        this.httpClient.get<Character[]>(`${this.resourceUrl}/getCharactersByName?name=${name}&group=${group}`)
+        this.httpClient.get<Character[]>(`${this.resourceUrl}/names?name=${name}&group=${group}`)
             .pipe(first())
             .subscribe({
                 next: (result) => {
