@@ -87,4 +87,4 @@ Update the `nx.json` file in the root directory:
 
 ## API Documentation
 
-This frontend connects to the VT Gallery API backend. For API documentation, please refer to the backend repository.
+This frontend connects to the VT Gallery API backend. For API documentation, please refer to the [backend repository](https://github.com/jsncrz/tx-gallery-api).
