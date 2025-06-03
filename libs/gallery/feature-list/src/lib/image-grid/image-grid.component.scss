@@ -1,0 +1,98 @@
+.photo-grid {
+    height: 75vh;
+}
+
+.photos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: stretch;
+    padding: 0;
+    gap: 25px 15px;
+}
+
+.photos .image-container {
+    display: block;
+    float: left;
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    height: 380px;
+    width: 304px;
+
+    .prev-image {
+        position: relative;
+        height: 310px;
+        width: 100%;
+        object-fit: cover;
+        margin: 0 auto;
+        border-radius: 5px;
+        border: 1px solid var(--gray-200);
+    }
+    .tweet-detail {
+        margin: 0px 5px;
+        .user-link {
+            font-size: 0.8em;
+        }
+        .like-count {
+            float: right;
+            font-size: 0.70em;
+            .heart {
+                color: var(--accent-500);
+            }
+    
+        }
+        .post-date {
+            font-size: 0.70em;
+            color: var(--gray-500);
+            margin-top: -10px
+        }
+    }
+
+}
+
+.dropdown-tags{
+    padding: 10px;
+    display: flex;  
+    flex-flow: column wrap;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.dropdown-character {
+    .character-name {
+        font-size: 1em;
+        font-weight: 500;
+    }
+    .character-tl-name {
+        font-size: 0.8em;
+        color: var(--gray-500)
+    }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    .photo-grid {
+        height: 70vh;
+    }
+    .photos .image-container {
+        width: 304px;
+    }
+ }
+ 
+@media all and (max-width: 768px) {
+    .photo-grid {
+        height: 80vh;
+    }
+    
+    .photos .image-container {
+        width: 95%;
+        height: 100%;
+        .prev-image {
+            position: relative;
+            height: 100%;
+            min-height: 10vh;
+        }
+    }
+}

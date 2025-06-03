@@ -1,0 +1,89 @@
+<div id="topbar">
+    <div id="topbar-side">
+        <button class="menu-icon" icon="tuiIconMenuLarge" title="Menu" tuiIconButton tuiSlot="left" appearance="burger"
+            size="xs" type="button" (click)="toggle(true)" (tuiActiveZoneChange)="toggle($event)">
+            <div *tuiSidebar="open; direction: 'left'" id="side-menu">
+                <div id="sidebar-menu">
+                    <button class="sidemenu-icon" [class.visible]="open" icon="tuiIconClose" title="Close" tuiIconButton
+                        tuiSlot="left" appearance="burger" size="xs" type="button" (click)="toggle(false)">
+                    </button>
+                </div>
+                <div class="nav-group">
+                    <p class="nav-group-header tui-text_body-xs">OVERVIEW</p>
+                    <p class="nav-item">
+                        <a class="nav-item-link" tuiLink routerLink="/" (click)="toggle(false)"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive="active-link">
+                            <tui-svg src="tuiIconImageLarge" class="icon"></tui-svg>
+                            <span class="nav-item-label">Home</span>
+                        </a>
+                    </p>
+                    <p class="nav-item">
+                        <a class="nav-item-link" tuiLink routerLink="/gallery" (click)="toggle(false)"
+                            routerLinkActive="active-link">
+                            <tui-svg src="tuiIconImageLarge" class="icon"></tui-svg>
+                            <span class="nav-item-label">Gallery</span>
+                        </a>
+                    </p>
+                    <p class="nav-item">
+                        <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters"
+                            (click)="toggle(false)" routerLinkActive="active-link">
+                            <tui-svg src="tuiIconSmileLarge" class="icon"></tui-svg>
+                            <span class="nav-item-label">Character</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </button>
+        <div class="logo clickable" tuiLink routerLink="/">
+            <img src="assets/logo.png">
+        </div>
+    </div>
+    <div class="topbar-group">
+        <div class="logo clickable" tuiLink routerLink="/" >
+            <img src="assets/logo.png">
+        </div>
+        <div class="nav-item">
+            <a class="nav-item-link" tuiLink routerLink="/" (click)="toggle(false)"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="active-link">
+                Home
+            </a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-item-link" tuiLink routerLink="/gallery" (click)="toggle(false)"
+                routerLinkActive="active-link">
+                Gallery
+            </a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-item-link tui-text_body-l-2" tuiLink routerLink="/characters" (click)="toggle(false)"
+                routerLinkActive="active-link">
+                Character
+            </a>
+        </div>
+    </div>
+    <div class="topbar-end">
+        <lib-auth-nav-option></lib-auth-nav-option>
+        <tui-hosted-dropdown [content]="menuDropdown">
+            <button class="menu-icon" icon="tuiIconMoreVertical" title="more" tuiIconButton appearance="burger"
+                size="xs" type="button">
+            </button>
+            <ng-template #menuDropdown let-activeZone>
+                <div class="menu-dropdown">
+                    <label>
+                        <tui-toggle size="m" [(ngModel)]="darkMode"></tui-toggle>
+                        Dark Mode
+                    </label>
+                    <div>
+                        <label>
+                            <tui-toggle size="m" [(ngModel)]="endlessScroll"></tui-toggle>
+                            Endless Scroll
+                        </label>
+                        <tui-tooltip content="Updating this will reload the page."></tui-tooltip>
+                    </div>
+                </div>
+            </ng-template>
+        </tui-hosted-dropdown>
+    </div>
+</div>

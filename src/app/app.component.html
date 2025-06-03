@@ -1,0 +1,12 @@
+<vg-dark-theme *ngIf="mode === 'onDark'"></vg-dark-theme>
+ 
+<tui-root [tuiMode]="mode">
+    <vg-navigation></vg-navigation>
+    <div id="main-wrapper">
+        <div id="main-layout">
+            <tui-island>
+                <router-outlet></router-outlet>
+            </tui-island>
+        </div>
+    </div>
+</tui-root>
