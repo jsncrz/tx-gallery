@@ -54,7 +54,7 @@ The application will be available at `http://localhost:4200`
 - **Frontend Framework**: Angular 16
 - **Language**: TypeScript
 - **Package Manager**: NPM
-- **Styling**: PrimeNG
+- **Styling**: TaigaUI
 - **API Integration**: VT Gallery API Backend
 
 ##  Screenshots
